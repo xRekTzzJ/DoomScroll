@@ -23,6 +23,7 @@ const ArticleItem = ({
 	image,
 	createdAt,
 	favoritesCount,
+	tagList,
 }: Props) => {
 	const [imageError, setImageError] = useState(false)
 
@@ -43,11 +44,21 @@ const ArticleItem = ({
 		<li className={classes['article-item']}>
 			<div className={classes['article-item__header']}>
 				<div className={classes['article-item__info-container']}>
-					<h2 className={classes['article-item__title']}>{title}</h2>
+					<h2
+						className={classes['article-item__title']}
+						style={{
+							opacity: title ? '1' : '0.5',
+						}}
+					>
+						{title ? title : 'The user has not added a title yet.'}
+					</h2>
 				</div>
 				<div className={classes['article-item__tag-container']}>
-					<span>Tag1</span>
-					<span>SomeTag</span>
+					{tagList.map((i: any, index: number) => {
+						if (index < 10 && i !== null && i.length) {
+							return <span key={index}>{i}</span>
+						}
+					})}
 				</div>
 				<div className={classes['article-item__person-info']}>
 					<span>{username}</span>
@@ -55,7 +66,15 @@ const ArticleItem = ({
 					{renderImage()}
 				</div>
 			</div>
-			<p>{description}</p>
+			<p
+				style={{
+					opacity: description ? '1' : '0.3',
+				}}
+			>
+				{description
+					? description
+					: 'The user has not added a description yet.'}
+			</p>
 			<Rate favoritesCount={favoritesCount} />
 		</li>
 	)
