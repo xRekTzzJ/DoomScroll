@@ -2,35 +2,46 @@ import { LoadingOutlined } from '@ant-design/icons'
 import { ConfigProvider, Pagination, Spin } from 'antd'
 import { useEffect, useState } from 'react'
 
-import { getArticles } from '../../services/realworld-service'
+import { useSelector } from 'react-redux'
+import { useAppDispatch } from '../../hooks/hooks'
+import { getArticles } from '../../store//actions'
 import ArticleItem from '../ArticleItem/ArticleItem'
 
-const ArticleList: React.FC = () => {
-	interface IAuthor {
-		username: string
-		bio?: string
-		image?: string
-		following: boolean
-	}
+interface IAuthor {
+	username: string
+	bio?: string
+	image?: string
+	following: boolean
+}
 
-	interface IArticle {
-		slug: string
-		title: string
-		description: string
-		body: string
-		tagList: string[]
-		createdAt: string
-		updatedAt: string
-		favorited: boolean
-		favoritesCount: number
-		author: IAuthor
+interface IArticle {
+	slug: string
+	title: string
+	description: string
+	body: string
+	tagList: string[]
+	createdAt: string
+	updatedAt: string
+	favorited: boolean
+	favoritesCount: number
+	author: IAuthor
+}
+
+interface RootState {
+	articles: {
+		articles: IArticle[]
+		page: number
+		articlesCount: number
 	}
+}
+
+const ArticleList: React.FC = () => {
 	const [loading, setLoading] = useState(true)
-	const [articles, setArticles] = useState([])
+	const dispatch = useAppDispatch()
+	const articles = useSelector((state: RootState) => state.articles.articles)
 
 	const loadArticles = async () => {
-		const articles = await getArticles()
-		setArticles(articles.articles)
+		await dispatch(getArticles())
 		setLoading(false)
 	}
 

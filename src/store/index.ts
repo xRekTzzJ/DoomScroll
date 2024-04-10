@@ -3,7 +3,7 @@ import { thunk } from 'redux-thunk'
 import articlesReducer from './articlesReduser'
 
 const reducer = combineReducers({
-	atricles: articlesReducer,
+	articles: articlesReducer,
 })
 
 export const store = configureStore({
@@ -16,3 +16,4 @@ export const store = configureStore({
 })
 
 export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

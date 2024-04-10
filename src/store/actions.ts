@@ -4,7 +4,7 @@ import { RootState } from '.'
 import { getArticles as articles } from '../services/realworld-service'
 
 export const getArticles = (
-	page: number,
+	page: number = 1,
 	key: string | undefined = undefined
 ): ThunkAction<void, RootState, unknown, UnknownAction> => {
 	return async dispatch => {
