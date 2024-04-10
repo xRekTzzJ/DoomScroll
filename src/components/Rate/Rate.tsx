@@ -1,7 +1,10 @@
 import like from '../../img/like.svg'
 import classes from './rate.module.scss'
+type Props = {
+	favoritesCount: number
+}
 
-const Rate = () => {
+const Rate = ({ favoritesCount }: Props) => {
 	return (
 		<div
 			className={classes['rate-container']}
@@ -10,7 +13,7 @@ const Rate = () => {
 			}}
 		>
 			<img src={like} alt='Like button.' />
-			<span>12</span>
+			<span>{favoritesCount}</span>
 		</div>
 	)
 }

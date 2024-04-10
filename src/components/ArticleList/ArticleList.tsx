@@ -1,7 +1,51 @@
-import { ConfigProvider, Pagination } from 'antd'
+import { LoadingOutlined } from '@ant-design/icons'
+import { ConfigProvider, Pagination, Spin } from 'antd'
+import { useEffect, useState } from 'react'
+
+import { getArticles } from '../../services/realworld-service'
 import ArticleItem from '../ArticleItem/ArticleItem'
 
 const ArticleList: React.FC = () => {
+	interface IAuthor {
+		username: string
+		bio?: string
+		image?: string
+		following: boolean
+	}
+
+	interface IArticle {
+		slug: string
+		title: string
+		description: string
+		body: string
+		tagList: string[]
+		createdAt: string
+		updatedAt: string
+		favorited: boolean
+		favoritesCount: number
+		author: IAuthor
+	}
+	const [loading, setLoading] = useState(true)
+	const [articles, setArticles] = useState([])
+
+	const loadArticles = async () => {
+		const articles = await getArticles()
+		setArticles(articles.articles)
+		setLoading(false)
+	}
+
+	useEffect(() => {
+		loadArticles()
+	}, [])
+
+	if (loading) {
+		return (
+			<section className='article-list-wrapper'>
+				<Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />;
+			</section>
+		)
+	}
+
 	return (
 		<section className='article-list-wrapper'>
 			<svg
@@ -32,26 +76,22 @@ const ArticleList: React.FC = () => {
 				</defs>
 			</svg>
 			<ul className='article-list'>
-				<ArticleItem />
-				<ArticleItem />
-				<ArticleItem />
-				<ArticleItem />
-				<ArticleItem />
-				<ArticleItem />
-				<ArticleItem />
-				<ArticleItem />
-				<ArticleItem />
-				<ArticleItem />
-				<ArticleItem />
-				<ArticleItem />
-				<ArticleItem />
-				<ArticleItem />
-				<ArticleItem />
-				<ArticleItem />
-				<ArticleItem />
-				<ArticleItem />
-				<ArticleItem />
-				<ArticleItem />
+				{articles.map((i: IArticle) => {
+					return (
+						<ArticleItem
+							key={i.slug}
+							image={i.author.image}
+							username={i.author.username}
+							title={i.title}
+							description={i.description}
+							favoritesCount={i.favoritesCount}
+							favorited={i.favorited}
+							tagList={i.tagList}
+							createdAt={i.createdAt}
+							slug={i.slug}
+						/>
+					)
+				})}
 			</ul>
 			<ConfigProvider
 				theme={{
