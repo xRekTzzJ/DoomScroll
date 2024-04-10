@@ -54,7 +54,7 @@ const ArticleItem = ({
 					</h2>
 				</div>
 				<div className={classes['article-item__tag-container']}>
-					{tagList.map((i: any, index: number) => {
+					{tagList.map((i: string, index: number) => {
 						if (index < 10 && i !== null && i.length) {
 							return <span key={index}>{i}</span>
 						}
