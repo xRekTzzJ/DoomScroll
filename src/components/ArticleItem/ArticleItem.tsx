@@ -1,7 +1,8 @@
 import avatar from '../../img/avatar.png'
+import Rate from '../Rate/Rate'
 import classes from './article-item.module.scss'
 
-const ArticleItem = () => {
+const ArticleItem: React.FC = () => {
 	return (
 		<li className={classes['article-item']}>
 			<div className={classes['article-item__header']}>
@@ -26,6 +27,7 @@ const ArticleItem = () => {
 				nam et nisi laboriosam soluta consequatur perferendis! Quisquam,
 				assumenda cupiditate.
 			</p>
+			<Rate />
 		</li>
 	)
 }

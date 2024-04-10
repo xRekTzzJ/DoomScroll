@@ -10,15 +10,23 @@
 		'header header'
 		'text rate';
 	box-shadow: 0px 0px 30px 0px #92929233;
+	transition: 0.3s;
+	border: 1px solid #000000;
+	border-radius: 20px;
+	cursor: pointer;
 
-	& p {
-		font-family: Inter;
-		font-size: 12px;
-		font-weight: 400;
-		line-height: 22px;
-		text-align: left;
-		width: 682px;
-		height: 45px;
+	&:hover {
+		background-color: #686de0;
+
+		h2 {
+			opacity: 0.9;
+			color: #ffffff;
+			text-shadow: 3px 3px 5px #2b2c45;
+		}
+
+		p {
+			text-shadow: 3px 3px 5px #2b2c45;
+		}
 	}
 
 	&__header {
@@ -46,16 +54,10 @@
 		margin: 0;
 		white-space: nowrap;
 		transition: 0.3s;
-		cursor: pointer;
 		width: fit-content;
 		max-width: 600px;
 		overflow: hidden;
 		text-overflow: ellipsis;
-
-		&:hover {
-			opacity: 0.9;
-			color: #c7c8f1;
-		}
 	}
 
 	&__tag-container {
@@ -141,22 +143,18 @@
 	}
 
 	& p {
+		font-family: Inter;
 		color: #ffffff;
 		font-size: 12px;
 		font-weight: 400;
 		line-height: 22px;
 		transition: 0.3s;
-		cursor: pointer;
 		width: 682px;
 		max-width: fit-content;
 		height: fit-content;
 		max-height: 40px;
 		overflow: hidden;
 		grid-area: text;
-
-		&:hover {
-			text-shadow: 3px 3px 10px #686de0;
-		}
 	}
 
 	&__info-container {
