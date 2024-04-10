@@ -52,7 +52,13 @@ const ArticleList: React.FC = () => {
 	if (loading) {
 		return (
 			<section className='article-list-wrapper'>
-				<Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />;
+				<Spin
+					indicator={<LoadingOutlined style={{ fontSize: 50 }} spin />}
+					style={{
+						margin: 'auto',
+					}}
+				/>
+				;
 			</section>
 		)
 	}
