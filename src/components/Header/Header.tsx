@@ -1,7 +1,9 @@
+import { Link } from 'react-router-dom'
+
 const Header: React.FC = () => {
 	return (
 		<header className='header'>
-			<h1>DoomScroll Blog</h1>
+			<Link to='/'>DoomScroll Blog</Link>
 			<div className='header__button-container'>
 				<a href='#'>Sign In</a>
 				<a href='#'>Sign Up</a>

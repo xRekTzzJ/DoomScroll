@@ -19,13 +19,13 @@ interface IArticle {
 	author: IAuthor
 }
 
-type GetArticle = (page?: number, key?: string) => any
+type GetArticle = (page: number, key?: string) => any
 // Promise<{
 // 	articles: IArticle[]
 // 	articlesCount: number
 // }>
 
-export const getArticles: GetArticle = async (page = 1, key = '') => {
+export const getArticles: GetArticle = async (page, key = '') => {
 	const data = await fetch(
 		`${baseURL}/articles?offset=${
 			page === 1 ? 0 : page === 2 ? 20 : page * 20

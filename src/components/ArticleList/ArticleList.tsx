@@ -3,6 +3,7 @@ import { ConfigProvider, Pagination, Spin } from 'antd'
 import { useEffect, useState } from 'react'
 
 import { useSelector } from 'react-redux'
+import { redirect, useLocation, useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../../hooks/hooks'
 import { getArticles } from '../../store//actions'
 import ArticleItem from '../ArticleItem/ArticleItem'
@@ -36,18 +37,31 @@ interface RootState {
 }
 
 const ArticleList: React.FC = () => {
+	const navigate = useNavigate()
+	const location = useLocation()
 	const [loading, setLoading] = useState(true)
 	const dispatch = useAppDispatch()
-	const articles = useSelector((state: RootState) => state.articles.articles)
+	const { articlesCount, articles } = useSelector(
+		(state: RootState) => state.articles
+	)
+
+	const params = new URLSearchParams(location.search)
+
+	const id = params.get('page')
 
 	const loadArticles = async () => {
-		await dispatch(getArticles())
+		setLoading(true)
+		await dispatch(getArticles(id ? Number(id) : 1))
 		setLoading(false)
 	}
 
 	useEffect(() => {
+		if (location.pathname === '/') {
+			redirect('/article-list/')
+		}
+
 		loadArticles()
-	}, [])
+	}, [id])
 
 	if (loading) {
 		return (
@@ -117,11 +131,24 @@ const ArticleList: React.FC = () => {
 							itemActiveBg: '#686DE0',
 							colorPrimary: '#000000',
 							colorText: '#ffffff',
+							fontFamily: 'Helvetica Neue',
+							fontSize: 18,
+							colorPrimaryHover: '#ffffff',
 						},
 					},
 				}}
 			>
-				<Pagination defaultCurrent={1} total={50} />
+				<Pagination
+					style={{
+						margin: '20px 0 50px',
+					}}
+					current={id ? Number(id) : 1}
+					total={Math.floor(articlesCount / 20) * 10}
+					onChange={e => {
+						navigate(`?page=${e}`)
+					}}
+					showSizeChanger={false}
+				/>
 			</ConfigProvider>
 			<svg
 				style={{
