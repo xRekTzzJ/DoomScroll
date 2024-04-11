@@ -1,5 +1,6 @@
 import { format } from 'date-fns'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import avatar from '../../img/avatar.png'
 import Rate from '../Rate/Rate'
 import classes from './article-item.module.scss'
@@ -24,9 +25,10 @@ const ArticleItem = ({
 	createdAt,
 	favoritesCount,
 	tagList,
+	slug,
 }: Props) => {
 	const [imageError, setImageError] = useState(false)
-
+	const navigate = useNavigate()
 	const renderImage = () => {
 		if (imageError) {
 			return <img src={avatar} alt='Person avatar.' />
@@ -41,7 +43,7 @@ const ArticleItem = ({
 	}
 
 	return (
-		<li className={classes['article-item']}>
+		<li className={classes['article-item']} onClick={() => navigate(slug)}>
 			<div className={classes['article-item__header']}>
 				<div className={classes['article-item__info-container']}>
 					<h2

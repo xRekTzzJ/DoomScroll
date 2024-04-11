@@ -19,13 +19,13 @@ interface IArticle {
 	author: IAuthor
 }
 
-type GetArticle = (page: number, key?: string) => any
+type GetArticles = (page: number, key?: string) => any
 // Promise<{
 // 	articles: IArticle[]
 // 	articlesCount: number
 // }>
 
-export const getArticles: GetArticle = async (page, key = '') => {
+export const getArticles: GetArticles = async (page, key = '') => {
 	const data = await fetch(
 		`${baseURL}/articles?offset=${
 			page === 1 ? 0 : page === 2 ? 20 : page * 20
@@ -45,4 +45,24 @@ export const getArticles: GetArticle = async (page, key = '') => {
 	const response = await data.json()
 
 	return { ...response, page }
+}
+
+export const getArticle = async (slug: string, key?: string) => {
+	const data = await fetch(
+		`${baseURL}articles/${slug}`,
+		key
+			? {
+					headers: {
+						Authorization: `Token ${key}`,
+					},
+			  }
+			: {}
+	)
+
+	if (!data.ok) {
+		throw data
+	}
+
+	const response = await data.json()
+	return response.article
 }

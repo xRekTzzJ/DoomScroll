@@ -1,4 +1,5 @@
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
+import Article from '../Article/Article'
 import ArticleList from '../ArticleList/ArticleList'
 import ErrorPage from '../ErrorPage/ErrorPage'
 import Header from '../Header/Header'
@@ -21,6 +22,15 @@ const App: React.FC = () => {
 				<>
 					<Header />
 					<ArticleList />
+				</>
+			),
+		},
+		{
+			path: '/articles/:slug/',
+			element: (
+				<>
+					<Header />
+					<Article />
 				</>
 			),
 		},

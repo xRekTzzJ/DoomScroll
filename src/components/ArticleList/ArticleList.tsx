@@ -8,14 +8,14 @@ import { useAppDispatch } from '../../hooks/hooks'
 import { getArticles } from '../../store//actions'
 import ArticleItem from '../ArticleItem/ArticleItem'
 
-interface IAuthor {
+export interface IAuthor {
 	username: string
 	bio?: string
 	image?: string
 	following: boolean
 }
 
-interface IArticle {
+export interface IArticle {
 	slug: string
 	title: string
 	description: string

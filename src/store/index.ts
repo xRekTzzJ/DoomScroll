@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { thunk } from 'redux-thunk'
-import articlesReducer from './articlesReduser'
+import articleReducer from './articleReducer'
+import articlesReducer from './articlesReducer'
 
 const reducer = combineReducers({
 	articles: articlesReducer,
+	article: articleReducer,
 })
 
 export const store = configureStore({
