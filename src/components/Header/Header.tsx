@@ -6,7 +6,7 @@ const Header: React.FC = () => {
 			<Link to='/'>DoomScroll Blog</Link>
 			<div className='header__button-container'>
 				<a href='#'>Sign In</a>
-				<a href='#'>Sign Up</a>
+				<Link to='/sign-up'>Sign Up</Link>
 			</div>
 			<svg
 				className='header__paint'

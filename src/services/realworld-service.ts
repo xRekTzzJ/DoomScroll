@@ -1,3 +1,5 @@
+import { IUserData } from '../store/actions'
+
 const baseURL: string = 'https://blog.kata.academy/api/'
 interface IAuthor {
 	username: string
@@ -65,4 +67,39 @@ export const getArticle = async (slug: string, key?: string) => {
 
 	const response = await data.json()
 	return response.article
+}
+
+export const registerNewUser = async (userData: IUserData) => {
+	const data = await fetch(`${baseURL}users`, {
+		method: 'POST',
+		headers: {
+			accept: 'application/json',
+			'Content-Type': 'application/json;charset=utf-8',
+		},
+		body: JSON.stringify({ user: userData }),
+	})
+
+	if (!data.ok) {
+		throw data
+	}
+
+	const result = await data.json()
+	localStorage.setItem('user', JSON.stringify(result.user))
+	return result.user
+}
+
+export const getUserInfo = async (key: string | undefined) => {
+	const data = await fetch(`${baseURL}user`, {
+		method: 'GET',
+		headers: {
+			Authorization: `Token ${key}`,
+		},
+	})
+
+	if (!data.ok) {
+		throw data
+	}
+
+	const result = await data.json()
+	return result.user
 }
