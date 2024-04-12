@@ -1,13 +1,68 @@
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import avatar from '../../img/avatar.png'
+import { IUserData } from '../../store/actions'
+
+interface IUserState {
+	user: IUserData
+}
 
 const Header: React.FC = () => {
+	const { token, username, image } = useSelector(
+		(state: IUserState) => state.user
+	)
+	const [imageError, setImageError] = useState(false)
+	const [logOutModal, setLogOutModal] = useState(false)
+
+	const SignButtons: React.FC = () => {
+		return (
+			<div className='header__button-container'>
+				<Link to={'/sign-in'}>Sign In</Link>
+				<Link to='/sign-up'>Sign Up</Link>
+			</div>
+		)
+	}
+
+	const renderImage = () => {
+		if (imageError || !image) {
+			return <img src={avatar} alt='Person avatar.' />
+		}
+		return (
+			<img
+				src={image}
+				alt='Person avatar.'
+				onError={() => setImageError(true)}
+			/>
+		)
+	}
+
+	const Profile: React.FC = () => {
+		return (
+			<div className='header__profile-container'>
+				<Link to='/new-article'>Create article</Link>
+				<Link className='header__profile' to='/profile'>
+					<div>
+						<span>{username}</span>
+						{renderImage()}
+					</div>
+				</Link>
+
+				<button
+					onClick={() => {
+						setLogOutModal(true)
+					}}
+				>
+					Log Out
+				</button>
+			</div>
+		)
+	}
+
 	return (
 		<header className='header'>
 			<Link to='/'>DoomScroll Blog</Link>
-			<div className='header__button-container'>
-				<a href='#'>Sign In</a>
-				<Link to='/sign-up'>Sign Up</Link>
-			</div>
+			{token ? <Profile /> : <SignButtons />}
 			<svg
 				className='header__paint'
 				width='827'
