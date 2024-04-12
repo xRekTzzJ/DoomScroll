@@ -7,6 +7,7 @@ import {
 	getUserInfo,
 	userLogin as login,
 	registerNewUser as register,
+	updateUser as update,
 } from '../services/realworld-service'
 
 export interface IUserData {
@@ -91,6 +92,18 @@ export const loginUser = (userdata: {
 		dispatch({
 			type: 'LOGIN',
 			payload: await login(userdata),
+		})
+	}
+}
+
+export const updateUser = (
+	userdata: IUserData,
+	key: string
+): ThunkAction<void, RootState, unknown, UnknownAction> => {
+	return async dispatch => {
+		dispatch({
+			type: 'UPDATE_USER',
+			payload: await update(userdata, key),
 		})
 	}
 }
