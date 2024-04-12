@@ -103,3 +103,23 @@ export const getUserInfo = async (key: string | undefined) => {
 	const result = await data.json()
 	return result.user
 }
+
+export const userLogin = async (userData: {
+	email: string
+	password: string
+}) => {
+	const data = await fetch(`${baseURL}users/login`, {
+		method: 'POST',
+		headers: {
+			accept: 'application/json',
+			'Content-Type': 'application/json;charset=utf-8',
+		},
+		body: JSON.stringify({ user: userData }),
+	})
+	if (!data.ok) {
+		throw data
+	}
+	const result = await data.json()
+	localStorage.setItem('user', JSON.stringify(result.user))
+	return result.user
+}

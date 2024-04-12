@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { useAppDispatch } from '../../hooks/hooks'
 import avatar from '../../img/avatar.png'
-import { getArticle } from '../../store/actions'
+import { getArticle, IUserData } from '../../store/actions'
 import { IArticle } from '../ArticleList/ArticleList'
 import Rate from '../Rate/Rate'
 import classes from './article.module.scss'
@@ -20,6 +20,11 @@ const Article = () => {
 	interface RootState {
 		article: IArticle
 	}
+
+	interface IUser {
+		user: IUserData
+	}
+
 	const {
 		title,
 		description,
@@ -30,6 +35,8 @@ const Article = () => {
 		favorited,
 		favoritesCount,
 	} = useSelector((state: RootState) => state.article)
+
+	const userName = useSelector((state: IUser) => state.user.username)
 
 	const loadArticle = async (slug = '') => {
 		await dispatch(getArticle(slug, ''))
@@ -77,7 +84,7 @@ const Article = () => {
 
 	return (
 		<section className={classes['article']}>
-			{author.username && (
+			{userName === author.username && (
 				<div className={classes['article__author-buttons']}>
 					<Popconfirm
 						title='Delete the task'

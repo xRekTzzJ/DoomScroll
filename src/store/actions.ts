@@ -5,6 +5,7 @@ import {
 	getArticle as article,
 	getArticles as articles,
 	getUserInfo,
+	userLogin as login,
 	registerNewUser as register,
 } from '../services/realworld-service'
 
@@ -71,5 +72,25 @@ export const checkAuth = (
 	return {
 		type: 'AUTH',
 		payload: userData,
+	}
+}
+
+export const logOut = () => {
+	localStorage.removeItem('user')
+	return {
+		type: 'LOG_OUT',
+		payload: {},
+	}
+}
+
+export const loginUser = (userdata: {
+	email: string
+	password: string
+}): ThunkAction<void, RootState, unknown, UnknownAction> => {
+	return async dispatch => {
+		dispatch({
+			type: 'LOGIN',
+			payload: await login(userdata),
+		})
 	}
 }

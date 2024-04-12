@@ -2,13 +2,13 @@ import { LoadingOutlined } from '@ant-design/icons'
 import { Spin } from 'antd'
 import { useEffect, useState } from 'react'
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
-import { ToastContainer } from 'react-toastify'
 import { useAppDispatch } from '../../hooks/hooks'
 import { checkAuth } from '../../store/actions'
 import Article from '../Article/Article'
 import ArticleList from '../ArticleList/ArticleList'
 import ErrorPage from '../ErrorPage/ErrorPage'
 import Header from '../Header/Header'
+import SignIn from '../SignIn/SignIn'
 import SignUp from '../SignUp/SignUp'
 
 const App: React.FC = () => {
@@ -39,12 +39,6 @@ const App: React.FC = () => {
 				<>
 					<Header />
 					<ErrorPage />
-					<ToastContainer
-						pauseOnHover={false}
-						position='top-right'
-						autoClose={3000}
-						pauseOnFocusLoss={false}
-					/>
 				</>
 			),
 		},
@@ -54,12 +48,6 @@ const App: React.FC = () => {
 				<>
 					<Header />
 					<ArticleList />
-					<ToastContainer
-						pauseOnHover={false}
-						position='top-right'
-						autoClose={3000}
-						pauseOnFocusLoss={false}
-					/>
 				</>
 			),
 		},
@@ -69,12 +57,6 @@ const App: React.FC = () => {
 				<>
 					<Header />
 					<Article />
-					<ToastContainer
-						pauseOnHover={false}
-						position='top-right'
-						autoClose={3000}
-						pauseOnFocusLoss={false}
-					/>
 				</>
 			),
 		},
@@ -84,12 +66,15 @@ const App: React.FC = () => {
 				<>
 					<Header />
 					<SignUp />
-					<ToastContainer
-						pauseOnHover={false}
-						position='top-right'
-						autoClose={3000}
-						pauseOnFocusLoss={false}
-					/>
+				</>
+			),
+		},
+		{
+			path: '/sign-in',
+			element: (
+				<>
+					<Header />
+					<SignIn />
 				</>
 			),
 		},

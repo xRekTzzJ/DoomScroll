@@ -1,8 +1,11 @@
+import { ConfigProvider, Modal } from 'antd'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { useAppDispatch } from '../../hooks/hooks'
 import avatar from '../../img/avatar.png'
-import { IUserData } from '../../store/actions'
+import { IUserData, logOut } from '../../store/actions'
 
 interface IUserState {
 	user: IUserData
@@ -14,6 +17,8 @@ const Header: React.FC = () => {
 	)
 	const [imageError, setImageError] = useState(false)
 	const [logOutModal, setLogOutModal] = useState(false)
+	const dispatch = useAppDispatch()
+	const navigate = useNavigate()
 
 	const SignButtons: React.FC = () => {
 		return (
@@ -34,6 +39,40 @@ const Header: React.FC = () => {
 				alt='Person avatar.'
 				onError={() => setImageError(true)}
 			/>
+		)
+	}
+
+	const LogOutModal = () => {
+		return (
+			<ConfigProvider
+				theme={{
+					components: {
+						Modal: {
+							headerBg: '#2C2C54',
+							contentBg: '#2C2C54',
+							titleColor: '#ffffff',
+							colorText: '#f0f0f0',
+							borderRadiusLG: 20,
+						},
+					},
+				}}
+			>
+				<Modal
+					title='Log out'
+					open={logOutModal}
+					onOk={() => {
+						setLogOutModal(false)
+						dispatch(logOut())
+						navigate('/')
+						toast.success('You have successfully logged out!')
+					}}
+					onCancel={() => {
+						setLogOutModal(false)
+					}}
+				>
+					<p>Do you really want to log out?</p>
+				</Modal>
+			</ConfigProvider>
 		)
 	}
 
@@ -63,6 +102,7 @@ const Header: React.FC = () => {
 		<header className='header'>
 			<Link to='/'>DoomScroll Blog</Link>
 			{token ? <Profile /> : <SignButtons />}
+			{logOutModal ? <LogOutModal /> : null}
 			<svg
 				className='header__paint'
 				width='827'

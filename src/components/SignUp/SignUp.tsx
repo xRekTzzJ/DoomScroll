@@ -1,3 +1,5 @@
+import { LoadingOutlined } from '@ant-design/icons'
+import { Spin } from 'antd'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
@@ -47,6 +49,24 @@ const SignUp = () => {
 			setLoading(false)
 			reset()
 		}
+	}
+
+	if (loading) {
+		return (
+			<section className={classes['form']}>
+				<Spin
+					indicator={
+						<LoadingOutlined
+							style={{
+								width: '100%',
+								fontSize: 48,
+							}}
+							spin
+						/>
+					}
+				/>
+			</section>
+		)
 	}
 
 	return (
