@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../../hooks/hooks'
 import { IUserData, updateUser } from '../../store/actions'
-import classes from '../sign-up/form.module.scss'
+import classes from '../SignUp/form.module.scss'
 
 interface IUserState {
 	user: {

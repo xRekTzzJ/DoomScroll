@@ -8,6 +8,7 @@ import Article from '../Article/Article'
 import ArticleList from '../ArticleList/ArticleList'
 import ErrorPage from '../ErrorPage/ErrorPage'
 import Header from '../Header/Header'
+import Profile from '../Profile/Profile'
 import SignIn from '../SignIn/SignIn'
 import SignUp from '../SignUp/SignUp'
 
@@ -75,6 +76,15 @@ const App: React.FC = () => {
 				<>
 					<Header />
 					<SignIn />
+				</>
+			),
+		},
+		{
+			path: '/profile',
+			element: (
+				<>
+					<Header />
+					<Profile />
 				</>
 			),
 		},
