@@ -2,20 +2,9 @@ import { format } from 'date-fns'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import avatar from '../assets/img/avatar.png'
+import { ArticleItemProps } from '../core/types/types'
 import classes from '../styles/article-item.module.scss'
 import Rate from './Rate'
-
-type Props = {
-	image?: string
-	username: string
-	title: string
-	description: string
-	favoritesCount: number
-	favorited: boolean
-	tagList: string[]
-	createdAt: string
-	slug: string
-}
 
 const ArticleItem = ({
 	title,
@@ -26,7 +15,7 @@ const ArticleItem = ({
 	favoritesCount,
 	tagList,
 	slug,
-}: Props) => {
+}: ArticleItemProps) => {
 	const [imageError, setImageError] = useState(false)
 	const navigate = useNavigate()
 	const renderImage = () => {

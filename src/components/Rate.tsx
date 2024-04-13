@@ -1,10 +1,8 @@
 import like from '../assets/img/like.svg'
+import { RateProps } from '../core/types/types'
 import classes from '../styles/rate.module.scss'
-type Props = {
-	favoritesCount: number
-}
 
-const Rate = ({ favoritesCount }: Props) => {
+const Rate = ({ favoritesCount }: RateProps) => {
 	return (
 		<div
 			className={classes['rate-container']}

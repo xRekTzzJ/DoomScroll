@@ -7,25 +7,9 @@ import { toast } from 'react-toastify'
 
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../core/hooks/hooks'
-import { IUserData, updateUser } from '../core/store/actions'
+import { updateUser } from '../core/store/actions'
+import { IProfileInputs, IUserData, IUserState } from '../core/types/types'
 import classes from '../styles/form.module.scss'
-
-interface IUserState {
-	user: {
-		username: string
-		email: string
-		token: string
-		image?: string
-		password?: string
-	}
-}
-
-interface Inputs {
-	username: string
-	email: string
-	image: string
-	password: string
-}
 
 const Profile = () => {
 	const navigate = useNavigate()
@@ -39,7 +23,7 @@ const Profile = () => {
 		formState: { errors, dirtyFields },
 		watch,
 		reset,
-	} = useForm<Inputs>({
+	} = useForm<IProfileInputs>({
 		mode: 'onChange',
 		defaultValues: {
 			username: user.username,

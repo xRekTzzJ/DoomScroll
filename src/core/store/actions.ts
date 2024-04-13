@@ -9,14 +9,7 @@ import {
 	registerNewUser as register,
 	updateUser as update,
 } from '../services/realworld-service'
-
-export interface IUserData {
-	username: string
-	email: string
-	token?: string | undefined
-	image?: string
-	password?: string
-}
+import { IUserData } from '../types/types'
 
 export const getArticles = (
 	page: number = 1,

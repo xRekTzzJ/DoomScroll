@@ -1,24 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit'
-
-interface IAuthor {
-	username: string
-	bio?: string
-	image?: string
-	following: boolean
-}
-
-interface IArticle {
-	slug: string
-	title: string
-	description: string
-	body: string
-	tags: string[]
-	createdAt: string
-	updatedAt: string
-	favorited: boolean
-	favoritesCount: number
-	author: IAuthor
-}
+import { IArticle } from '../../types/types'
 
 const articleReducer = (state = {}, action: PayloadAction<IArticle>) => {
 	switch (action.type) {

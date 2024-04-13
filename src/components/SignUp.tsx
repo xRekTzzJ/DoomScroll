@@ -5,15 +5,9 @@ import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useAppDispatch } from '../core/hooks/hooks'
-import { IUserData, registerNewUser } from '../core/store/actions'
+import { registerNewUser } from '../core/store/actions'
+import { ISignUpInputs, IUserData } from '../core/types/types'
 import classes from '../styles/form.module.scss'
-
-type Inputs = {
-	username: string
-	email: string
-	password: string
-	repeatPassword: string
-}
 
 const SignUp = () => {
 	const [loading, setLoading] = useState(false)
@@ -26,7 +20,7 @@ const SignUp = () => {
 		watch,
 		getValues,
 		reset,
-	} = useForm<Inputs>({
+	} = useForm<ISignUpInputs>({
 		mode: 'onChange',
 	})
 	const [agree, setAgree] = useState(false)

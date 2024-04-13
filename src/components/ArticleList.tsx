@@ -6,35 +6,8 @@ import { useSelector } from 'react-redux'
 import { redirect, useLocation, useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../core/hooks/hooks'
 import { getArticles } from '../core/store/actions'
+import { IArticle, IArticlesState } from '../core/types/types'
 import ArticleItem from './ArticleItem'
-
-export interface IAuthor {
-	username: string
-	bio?: string
-	image?: string
-	following: boolean
-}
-
-export interface IArticle {
-	slug: string
-	title: string
-	description: string
-	body: string
-	tagList: string[]
-	createdAt: string
-	updatedAt: string
-	favorited: boolean
-	favoritesCount: number
-	author: IAuthor
-}
-
-interface RootState {
-	articles: {
-		articles: IArticle[]
-		page: number
-		articlesCount: number
-	}
-}
 
 const ArticleList: React.FC = () => {
 	const navigate = useNavigate()
@@ -42,7 +15,7 @@ const ArticleList: React.FC = () => {
 	const [loading, setLoading] = useState(true)
 	const dispatch = useAppDispatch()
 	const { articlesCount, articles } = useSelector(
-		(state: RootState) => state.articles
+		(state: IArticlesState) => state.articles
 	)
 
 	const params = new URLSearchParams(location.search)

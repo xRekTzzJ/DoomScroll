@@ -5,11 +5,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import avatar from '../assets/img/avatar.png'
 import { useAppDispatch } from '../core/hooks/hooks'
-import { IUserData, logOut } from '../core/store/actions'
-
-interface IUserState {
-	user: IUserData
-}
+import { logOut } from '../core/store/actions'
+import { IUserState } from '../core/types/types'
 
 const Header: React.FC = () => {
 	const { token, username, image } = useSelector(

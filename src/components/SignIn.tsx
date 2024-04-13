@@ -6,12 +6,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useAppDispatch } from '../core/hooks/hooks'
 import { loginUser } from '../core/store/actions'
+import { ISignInInputs } from '../core/types/types'
 import classes from '../styles/form.module.scss'
-
-interface Inputs {
-	email: string
-	password: string
-}
 
 const SignIn = () => {
 	const dispatch = useAppDispatch()
@@ -23,7 +19,7 @@ const SignIn = () => {
 		formState: { errors },
 		watch,
 		reset,
-	} = useForm<Inputs>({
+	} = useForm<ISignInInputs>({
 		mode: 'onChange',
 	})
 

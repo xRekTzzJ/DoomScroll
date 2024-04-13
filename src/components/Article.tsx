@@ -7,9 +7,9 @@ import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import avatar from '../assets/img/avatar.png'
 import { useAppDispatch } from '../core/hooks/hooks'
-import { getArticle, IUserData } from '../core/store/actions'
+import { getArticle } from '../core/store/actions'
+import { IArticleState, IUserState } from '../core/types/types'
 import classes from '../styles/article.module.scss'
-import { IArticle } from './ArticleList'
 import Rate from './Rate'
 
 const Article = () => {
@@ -17,13 +17,6 @@ const Article = () => {
 	const [loading, setLoading] = useState(true)
 	const { slug } = useParams()
 	const [imageError, setImageError] = useState(false)
-	interface RootState {
-		article: IArticle
-	}
-
-	interface IUser {
-		user: IUserData
-	}
 
 	const {
 		title,
@@ -34,9 +27,9 @@ const Article = () => {
 		author,
 		favorited,
 		favoritesCount,
-	} = useSelector((state: RootState) => state.article)
+	} = useSelector((state: IArticleState) => state.article)
 
-	const userName = useSelector((state: IUser) => state.user.username)
+	const userName = useSelector((state: IUserState) => state.user.username)
 
 	const loadArticle = async (slug = '') => {
 		await dispatch(getArticle(slug, ''))

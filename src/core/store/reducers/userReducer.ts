@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit'
-import { IUserData } from '../actions'
+import { IUserData } from '../../types/types'
 
 const userReducer = (state = {}, action: PayloadAction<IUserData>) => {
 	switch (action.type) {

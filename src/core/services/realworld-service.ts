@@ -1,31 +1,8 @@
-import { IUserData } from '../store/actions'
+import { IUserData } from '../types/types'
 
 const baseURL: string = 'https://blog.kata.academy/api/'
-interface IAuthor {
-	username: string
-	bio?: string
-	image?: string
-	following: boolean
-}
-
-interface IArticle {
-	slug: string
-	title: string
-	description: string
-	body: string
-	tags: string[]
-	createdAt: string
-	updatedAt: string
-	favorited: boolean
-	favoritesCount: number
-	author: IAuthor
-}
 
 type GetArticles = (page: number, key?: string) => any
-// Promise<{
-// 	articles: IArticle[]
-// 	articlesCount: number
-// }>
 
 export const getArticles: GetArticles = async (page, key = '') => {
 	const data = await fetch(
