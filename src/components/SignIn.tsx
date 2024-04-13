@@ -4,8 +4,8 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { useAppDispatch } from '../hooks/hooks'
-import { loginUser } from '../store/actions'
+import { useAppDispatch } from '../core/hooks/hooks'
+import { loginUser } from '../core/store/actions'
 import classes from '../styles/form.module.scss'
 
 interface Inputs {

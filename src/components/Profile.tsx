@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 
 import { useNavigate } from 'react-router-dom'
-import { useAppDispatch } from '../hooks/hooks'
-import { IUserData, updateUser } from '../store/actions'
+import { useAppDispatch } from '../core/hooks/hooks'
+import { IUserData, updateUser } from '../core/store/actions'
 import classes from '../styles/form.module.scss'
 
 interface IUserState {

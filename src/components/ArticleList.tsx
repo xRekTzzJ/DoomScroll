@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react'
 
 import { useSelector } from 'react-redux'
 import { redirect, useLocation, useNavigate } from 'react-router-dom'
-import { useAppDispatch } from '../hooks/hooks'
-import { getArticles } from '../store/actions'
+import { useAppDispatch } from '../core/hooks/hooks'
+import { getArticles } from '../core/store/actions'
 import ArticleItem from './ArticleItem'
 
 export interface IAuthor {

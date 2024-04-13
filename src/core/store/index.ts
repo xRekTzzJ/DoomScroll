@@ -1,8 +1,8 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { thunk } from 'redux-thunk'
-import articleReducer from './articleReducer'
-import articlesReducer from './articlesReducer'
-import userReducer from './userReducer'
+import articleReducer from './reducers/articleReducer'
+import articlesReducer from './reducers/articlesReducer'
+import userReducer from './reducers/userReducer'
 
 const reducer = combineReducers({
 	articles: articlesReducer,

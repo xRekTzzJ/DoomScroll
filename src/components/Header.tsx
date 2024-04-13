@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import avatar from '../assets/img/avatar.png'
-import { useAppDispatch } from '../hooks/hooks'
-import { IUserData, logOut } from '../store/actions'
+import { useAppDispatch } from '../core/hooks/hooks'
+import { IUserData, logOut } from '../core/store/actions'
 
 interface IUserState {
 	user: IUserData
