@@ -8,8 +8,8 @@ import ArticleListPage from '../pages/ArticleListPage'
 import ArticlePage from '../pages/ArticlePage'
 import NotFoundPage from '../pages/NotFoundPage'
 import ProfilePage from '../pages/ProfilePage'
+import SignInPage from '../pages/SignInPage'
 import SignUpPage from '../pages/SignUpPage'
-import SignIn from './SignIn'
 
 const App: React.FC = () => {
 	const [loading, setLoading] = useState(true)
@@ -51,7 +51,7 @@ const App: React.FC = () => {
 		},
 		{
 			path: '/sign-in',
-			element: <SignIn />,
+			element: <SignInPage />,
 		},
 		{
 			path: '/profile',
