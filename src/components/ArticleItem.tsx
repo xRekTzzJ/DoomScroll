@@ -1,9 +1,9 @@
 import { format } from 'date-fns'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import avatar from '../../img/avatar.png'
-import Rate from '../Rate/Rate'
-import classes from './article-item.module.scss'
+import avatar from '../assets/img/avatar.png'
+import classes from '../styles/article-item.module.scss'
+import Rate from './Rate'
 
 type Props = {
 	image?: string

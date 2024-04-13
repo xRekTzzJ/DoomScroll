@@ -3,9 +3,9 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { useAppDispatch } from '../../hooks/hooks'
-import avatar from '../../img/avatar.png'
-import { IUserData, logOut } from '../../store/actions'
+import avatar from '../assets/img/avatar.png'
+import { useAppDispatch } from '../hooks/hooks'
+import { IUserData, logOut } from '../store/actions'
 
 interface IUserState {
 	user: IUserData
@@ -100,7 +100,7 @@ const Header: React.FC = () => {
 
 	return (
 		<header className='header'>
-			<Link to='/'>DoomScroll Blog</Link>
+			<Link to='/articles/'>DoomScroll Blog</Link>
 			{token ? <Profile /> : <SignButtons />}
 			{logOutModal ? <LogOutModal /> : null}
 			<svg

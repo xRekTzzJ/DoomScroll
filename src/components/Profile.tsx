@@ -6,9 +6,9 @@ import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 
 import { useNavigate } from 'react-router-dom'
-import { useAppDispatch } from '../../hooks/hooks'
-import { IUserData, updateUser } from '../../store/actions'
-import classes from '../SignUp/form.module.scss'
+import { useAppDispatch } from '../hooks/hooks'
+import { IUserData, updateUser } from '../store/actions'
+import classes from '../styles/form.module.scss'
 
 interface IUserState {
 	user: {

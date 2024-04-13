@@ -5,12 +5,12 @@ import { useEffect, useState } from 'react'
 import Markdown from 'react-markdown'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { useAppDispatch } from '../../hooks/hooks'
-import avatar from '../../img/avatar.png'
-import { getArticle, IUserData } from '../../store/actions'
-import { IArticle } from '../ArticleList/ArticleList'
-import Rate from '../Rate/Rate'
-import classes from './article.module.scss'
+import avatar from '../assets/img/avatar.png'
+import { useAppDispatch } from '../hooks/hooks'
+import { getArticle, IUserData } from '../store/actions'
+import classes from '../styles/article.module.scss'
+import { IArticle } from './ArticleList'
+import Rate from './Rate'
 
 const Article = () => {
 	const dispatch = useAppDispatch()

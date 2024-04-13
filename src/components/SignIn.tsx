@@ -4,9 +4,9 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { useAppDispatch } from '../../hooks/hooks'
-import { loginUser } from '../../store/actions'
-import classes from '../SignUp/form.module.scss'
+import { useAppDispatch } from '../hooks/hooks'
+import { loginUser } from '../store/actions'
+import classes from '../styles/form.module.scss'
 
 interface Inputs {
 	email: string

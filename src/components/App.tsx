@@ -2,15 +2,14 @@ import { LoadingOutlined } from '@ant-design/icons'
 import { Spin } from 'antd'
 import { useEffect, useState } from 'react'
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
-import { useAppDispatch } from '../../hooks/hooks'
-import { checkAuth } from '../../store/actions'
-import Article from '../Article/Article'
-import ArticleList from '../ArticleList/ArticleList'
-import ErrorPage from '../ErrorPage/ErrorPage'
-import Header from '../Header/Header'
-import Profile from '../Profile/Profile'
-import SignIn from '../SignIn/SignIn'
-import SignUp from '../SignUp/SignUp'
+import { useAppDispatch } from '../hooks/hooks'
+import ArticleListPage from '../pages/ArticleListPage'
+import ArticlePage from '../pages/ArticlePage'
+import ProfilePage from '../pages/ProfilePage'
+import SignUpPage from '../pages/SignUpPage'
+import { checkAuth } from '../store/actions'
+import ErrorPage from './ErrorPage'
+import SignIn from './SignIn'
 
 const App: React.FC = () => {
 	const [loading, setLoading] = useState(true)
@@ -36,57 +35,27 @@ const App: React.FC = () => {
 		{
 			path: '/',
 			element: <Navigate to={'/articles/'} />,
-			errorElement: (
-				<>
-					<Header />
-					<ErrorPage />
-				</>
-			),
+			errorElement: <ErrorPage />,
 		},
 		{
 			path: '/articles/',
-			element: (
-				<>
-					<Header />
-					<ArticleList />
-				</>
-			),
+			element: <ArticleListPage />,
 		},
 		{
 			path: '/articles/:slug/',
-			element: (
-				<>
-					<Header />
-					<Article />
-				</>
-			),
+			element: <ArticlePage />,
 		},
 		{
 			path: '/sign-up',
-			element: (
-				<>
-					<Header />
-					<SignUp />
-				</>
-			),
+			element: <SignUpPage />,
 		},
 		{
 			path: '/sign-in',
-			element: (
-				<>
-					<Header />
-					<SignIn />
-				</>
-			),
+			element: <SignIn />,
 		},
 		{
 			path: '/profile',
-			element: (
-				<>
-					<Header />
-					<Profile />
-				</>
-			),
+			element: <ProfilePage />,
 		},
 	])
 

@@ -1,5 +1,5 @@
-import like from '../../img/like.svg'
-import classes from './rate.module.scss'
+import like from '../assets/img/like.svg'
+import classes from '../styles/rate.module.scss'
 type Props = {
 	favoritesCount: number
 }
