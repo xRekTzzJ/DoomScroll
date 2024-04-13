@@ -11,8 +11,11 @@ import classes from '../styles/form.module.scss'
 
 const SignIn = () => {
 	const dispatch = useAppDispatch()
+
 	const navigate = useNavigate()
+
 	const [loading, setLoading] = useState(false)
+
 	const {
 		register,
 		handleSubmit,

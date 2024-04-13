@@ -6,9 +6,9 @@ import { useAppDispatch } from '../core/hooks/hooks'
 import { checkAuth } from '../core/store/actions'
 import ArticleListPage from '../pages/ArticleListPage'
 import ArticlePage from '../pages/ArticlePage'
+import NotFoundPage from '../pages/NotFoundPage'
 import ProfilePage from '../pages/ProfilePage'
 import SignUpPage from '../pages/SignUpPage'
-import ErrorPage from './ErrorPage'
 import SignIn from './SignIn'
 
 const App: React.FC = () => {
@@ -20,9 +20,9 @@ const App: React.FC = () => {
 			await dispatch(
 				checkAuth(JSON.parse(localStorage.getItem('user') || '{}'))
 			)
-			setLoading(false)
 		} catch {
 			localStorage.removeItem('user')
+		} finally {
 			setLoading(false)
 		}
 	}
@@ -35,7 +35,7 @@ const App: React.FC = () => {
 		{
 			path: '/',
 			element: <Navigate to={'/articles/'} />,
-			errorElement: <ErrorPage />,
+			errorElement: <NotFoundPage />,
 		},
 		{
 			path: '/articles/',
@@ -77,6 +77,7 @@ const App: React.FC = () => {
 			/>
 		)
 	}
+
 	return <RouterProvider router={router} />
 }
 

@@ -3,7 +3,7 @@ import { ConfigProvider, Pagination, Spin } from 'antd'
 import { useEffect, useState } from 'react'
 
 import { useSelector } from 'react-redux'
-import { redirect, useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../core/hooks/hooks'
 import { getArticles } from '../core/store/actions'
 import { IArticle, IArticlesState } from '../core/types/types'
@@ -12,8 +12,11 @@ import ArticleItem from './ArticleItem'
 const ArticleList: React.FC = () => {
 	const navigate = useNavigate()
 	const location = useLocation()
+
 	const [loading, setLoading] = useState(true)
+
 	const dispatch = useAppDispatch()
+
 	const { articlesCount, articles } = useSelector(
 		(state: IArticlesState) => state.articles
 	)
@@ -29,10 +32,6 @@ const ArticleList: React.FC = () => {
 	}
 
 	useEffect(() => {
-		if (location.pathname === '/') {
-			redirect('/article-list/')
-		}
-
 		loadArticles()
 	}, [id])
 

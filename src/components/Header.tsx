@@ -1,105 +1,37 @@
-import { ConfigProvider, Modal } from 'antd'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
-import avatar from '../assets/img/avatar.png'
-import { useAppDispatch } from '../core/hooks/hooks'
-import { logOut } from '../core/store/actions'
+import { Link } from 'react-router-dom'
 import { IUserState } from '../core/types/types'
+import HeaderProfile from './HeaderProfile'
+import LogOutModal from './LogOutModal'
+import SignButtons from './SignButtons'
 
 const Header: React.FC = () => {
 	const { token, username, image } = useSelector(
 		(state: IUserState) => state.user
 	)
-	const [imageError, setImageError] = useState(false)
+
 	const [logOutModal, setLogOutModal] = useState(false)
-	const dispatch = useAppDispatch()
-	const navigate = useNavigate()
 
-	const SignButtons: React.FC = () => {
-		return (
-			<div className='header__button-container'>
-				<Link to={'/sign-in'}>Sign In</Link>
-				<Link to='/sign-up'>Sign Up</Link>
-			</div>
-		)
-	}
-
-	const renderImage = () => {
-		if (imageError || !image) {
-			return <img src={avatar} alt='Person avatar.' />
-		}
-		return (
-			<img
-				src={image}
-				alt='Person avatar.'
-				onError={() => setImageError(true)}
-			/>
-		)
-	}
-
-	const LogOutModal = () => {
-		return (
-			<ConfigProvider
-				theme={{
-					components: {
-						Modal: {
-							headerBg: '#2C2C54',
-							contentBg: '#2C2C54',
-							titleColor: '#ffffff',
-							colorText: '#f0f0f0',
-							borderRadiusLG: 20,
-						},
-					},
-				}}
-			>
-				<Modal
-					title='Log out'
-					open={logOutModal}
-					onOk={() => {
-						setLogOutModal(false)
-						dispatch(logOut())
-						navigate('/')
-						toast.success('You have successfully logged out!')
-					}}
-					onCancel={() => {
-						setLogOutModal(false)
-					}}
-				>
-					<p>Do you really want to log out?</p>
-				</Modal>
-			</ConfigProvider>
-		)
-	}
-
-	const Profile: React.FC = () => {
-		return (
-			<div className='header__profile-container'>
-				<Link to='/new-article'>Create article</Link>
-				<Link className='header__profile' to='/profile'>
-					<div>
-						<span>{username}</span>
-						{renderImage()}
-					</div>
-				</Link>
-
-				<button
-					onClick={() => {
-						setLogOutModal(true)
-					}}
-				>
-					Log Out
-				</button>
-			</div>
-		)
+	const logOutHandler = (boolean: boolean) => {
+		setLogOutModal(boolean)
 	}
 
 	return (
 		<header className='header'>
 			<Link to='/articles/'>DoomScroll Blog</Link>
-			{token ? <Profile /> : <SignButtons />}
-			{logOutModal ? <LogOutModal /> : null}
+			{token ? (
+				<HeaderProfile
+					image={image}
+					username={username}
+					logOutHandler={logOutHandler}
+				/>
+			) : (
+				<SignButtons />
+			)}
+			{logOutModal ? (
+				<LogOutModal active={logOutModal} logOutHandler={logOutHandler} />
+			) : null}
 			<svg
 				className='header__paint'
 				width='827'

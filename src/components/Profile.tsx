@@ -13,14 +13,18 @@ import {
 	IProfileUserState,
 	IUserData,
 } from '../core/types/types'
+
 import classes from '../styles/form.module.scss'
 
 const Profile = () => {
 	const navigate = useNavigate()
+
 	const dispatch = useAppDispatch()
+
 	const [loading, setLoading] = useState(false)
+
 	const user = useSelector((state: IProfileUserState) => state.user)
-	const { token } = user
+
 	const {
 		register,
 		handleSubmit,
@@ -51,7 +55,7 @@ const Profile = () => {
 		}
 
 		try {
-			await dispatch(updateUser(validateData(data), token))
+			await dispatch(updateUser(validateData(data), user.token))
 			setLoading(false)
 			navigate('/')
 			toast.success('You have successfully updated your profile!')

@@ -5,18 +5,19 @@ import { useEffect, useState } from 'react'
 import Markdown from 'react-markdown'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import avatar from '../assets/img/avatar.png'
 import { useAppDispatch } from '../core/hooks/hooks'
 import { getArticle } from '../core/store/actions'
 import { IArticleState, IUserState } from '../core/types/types'
 import classes from '../styles/article.module.scss'
 import Rate from './Rate'
+import UserImage from './UserImage'
 
 const Article = () => {
 	const dispatch = useAppDispatch()
 	const [loading, setLoading] = useState(true)
-	const { slug } = useParams()
 	const [imageError, setImageError] = useState(false)
+
+	const { slug } = useParams()
 
 	const {
 		title,
@@ -28,7 +29,6 @@ const Article = () => {
 		favorited,
 		favoritesCount,
 	} = useSelector((state: IArticleState) => state.article)
-
 	const userName = useSelector((state: IUserState) => state.user.username)
 
 	const loadArticle = async (slug = '') => {
@@ -51,7 +51,6 @@ const Article = () => {
 					indicator={
 						<LoadingOutlined
 							style={{
-								color: '#52c41a',
 								fontSize: 48,
 							}}
 							spin
@@ -59,19 +58,6 @@ const Article = () => {
 					}
 				/>
 			</section>
-		)
-	}
-
-	const renderImage = () => {
-		if (imageError) {
-			return <img src={avatar} alt='Person avatar.' />
-		}
-		return (
-			<img
-				src={author.image}
-				alt='Person avatar.'
-				onError={() => setImageError(true)}
-			/>
 		)
 	}
 
@@ -128,7 +114,7 @@ const Article = () => {
 				<div className={classes['article__person-info']}>
 					<span>{author.username}</span>
 					<span>{format(new Date(createdAt), 'MMMM dd, yyyy')}</span>
-					{renderImage()}
+					<UserImage image={author.image} />
 				</div>
 			</div>
 			<div className={classes['article__description-container']}>

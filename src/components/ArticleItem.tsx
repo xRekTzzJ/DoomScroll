@@ -1,10 +1,9 @@
 import { format } from 'date-fns'
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import avatar from '../assets/img/avatar.png'
 import { ArticleItemProps } from '../core/types/types'
 import classes from '../styles/article-item.module.scss'
 import Rate from './Rate'
+import UserImage from './UserImage'
 
 const ArticleItem = ({
 	title,
@@ -16,20 +15,7 @@ const ArticleItem = ({
 	tagList,
 	slug,
 }: ArticleItemProps) => {
-	const [imageError, setImageError] = useState(false)
 	const navigate = useNavigate()
-	const renderImage = () => {
-		if (imageError) {
-			return <img src={avatar} alt='Person avatar.' />
-		}
-		return (
-			<img
-				src={image}
-				alt='Person avatar.'
-				onError={() => setImageError(true)}
-			/>
-		)
-	}
 
 	return (
 		<li className={classes['article-item']} onClick={() => navigate(slug)}>
@@ -54,7 +40,7 @@ const ArticleItem = ({
 				<div className={classes['article-item__person-info']}>
 					<span>{username}</span>
 					<span>{format(new Date(createdAt), 'MMMM dd, yyyy')}</span>
-					{renderImage()}
+					<UserImage image={image} />
 				</div>
 			</div>
 			<p
