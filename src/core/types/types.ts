@@ -26,18 +26,6 @@ export interface IUserState {
 	user: IUserData
 }
 
-export type ArticleItemProps = {
-	image?: string
-	username: string
-	title: string
-	description: string
-	favoritesCount: number
-	favorited: boolean
-	tagList: string[]
-	createdAt: string
-	slug: string
-}
-
 export interface IArticlesState {
 	articles: {
 		articles: IArticle[]
@@ -51,10 +39,6 @@ export interface IProfileInputs {
 	email: string
 	image: string
 	password: string
-}
-
-export type RateProps = {
-	favoritesCount: number
 }
 
 export interface ISignInInputs {
@@ -85,4 +69,20 @@ export interface IProfileUserState {
 		image?: string
 		password?: string
 	}
+}
+
+export type ArticleItemProps = {
+	image?: string
+	username: string
+	title: string
+	description: string
+	favoritesCount: number
+	favorited: boolean
+	tagList: string[]
+	createdAt: string
+	slug: string
+}
+
+export type RateProps = {
+	favoritesCount: number
 }

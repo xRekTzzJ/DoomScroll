@@ -2,9 +2,7 @@ import { IUserData } from '../types/types'
 
 const baseURL: string = 'https://blog.kata.academy/api/'
 
-type GetArticles = (page: number, key?: string) => any
-
-export const getArticles: GetArticles = async (page, key = '') => {
+export const getArticles = async (page: number, key = '') => {
 	const data = await fetch(
 		`${baseURL}/articles?offset=${
 			page === 1 ? 0 : page === 2 ? 20 : page * 20
