@@ -76,3 +76,13 @@ export interface IUserData {
 	image?: string
 	password?: string
 }
+
+export interface IProfileUserState {
+	user: {
+		username: string
+		email: string
+		token: string
+		image?: string
+		password?: string
+	}
+}

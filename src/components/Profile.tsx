@@ -8,14 +8,18 @@ import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../core/hooks/hooks'
 import { updateUser } from '../core/store/actions'
-import { IProfileInputs, IUserData, IUserState } from '../core/types/types'
+import {
+	IProfileInputs,
+	IProfileUserState,
+	IUserData,
+} from '../core/types/types'
 import classes from '../styles/form.module.scss'
 
 const Profile = () => {
 	const navigate = useNavigate()
 	const dispatch = useAppDispatch()
 	const [loading, setLoading] = useState(false)
-	const user = useSelector((state: IUserState) => state.user)
+	const user = useSelector((state: IProfileUserState) => state.user)
 	const { token } = user
 	const {
 		register,
