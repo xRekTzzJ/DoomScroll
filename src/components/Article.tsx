@@ -15,7 +15,6 @@ import UserImage from './UserImage'
 const Article = () => {
 	const dispatch = useAppDispatch()
 	const [loading, setLoading] = useState(true)
-	const [imageError, setImageError] = useState(false)
 
 	const { slug } = useParams()
 
@@ -29,10 +28,10 @@ const Article = () => {
 		favorited,
 		favoritesCount,
 	} = useSelector((state: IArticleState) => state.article)
-	const userName = useSelector((state: IUserState) => state.user.username)
+	const { username, token } = useSelector((state: IUserState) => state.user)
 
 	const loadArticle = async (slug = '') => {
-		await dispatch(getArticle(slug, ''))
+		await dispatch(getArticle(slug, token))
 		setLoading(false)
 	}
 
@@ -63,7 +62,7 @@ const Article = () => {
 
 	return (
 		<section className={classes['article']}>
-			{userName === author.username && (
+			{username === author.username && (
 				<div className={classes['article__author-buttons']}>
 					<Popconfirm
 						title='Delete the task'
@@ -128,7 +127,11 @@ const Article = () => {
 						? description
 						: 'The user has not added a description yet.'}
 				</p>
-				<Rate favoritesCount={favoritesCount} />
+				<Rate
+					favoritesCount={favoritesCount}
+					favorited={favorited}
+					slug={slug ? slug : ''}
+				/>
 			</div>
 
 			<div className={classes['article__markdown']}>

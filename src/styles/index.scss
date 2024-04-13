@@ -163,15 +163,25 @@ body {
 				text-shadow: 1px 1px 3px red;
 				color: #ffffff !important;
 			}
+
+			img {
+				transform: scale(1.2);
+				border: 1px solid #ffffff;
+			}
 		}
 		img {
+			margin: 0;
+			padding: 0;
 			border-radius: 10px;
+			transition: 0.3s;
 		}
 		span {
 			transition: 0.3s;
 			font-size: 20px;
 			color: #f0f0f0 !important;
 			font-weight: 300;
+			margin: 0;
+			padding: 0;
 		}
 	}
 }

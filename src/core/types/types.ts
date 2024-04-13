@@ -85,4 +85,6 @@ export type ArticleItemProps = {
 
 export type RateProps = {
 	favoritesCount: number
+	favorited: boolean
+	slug: string
 }

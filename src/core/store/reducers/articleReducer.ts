@@ -7,12 +7,6 @@ const articleReducer = (state = {}, action: PayloadAction<IArticle>) => {
 			return {
 				...action.payload,
 			}
-		case 'UPDATE_ARTICLE_FAVORITES_INFO':
-			return {
-				...state,
-				favorited: action.payload.favorited,
-				favoritesCount: action.payload.favoritesCount,
-			}
 		default:
 			return state
 	}

@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../core/hooks/hooks'
 import { getArticles } from '../core/store/actions'
-import { IArticle, IArticlesState } from '../core/types/types'
+import { IArticle, IArticlesState, IUserState } from '../core/types/types'
 import ArticleItem from './ArticleItem'
 
 const ArticleList: React.FC = () => {
@@ -20,20 +20,21 @@ const ArticleList: React.FC = () => {
 	const { articlesCount, articles } = useSelector(
 		(state: IArticlesState) => state.articles
 	)
+	const { token } = useSelector((state: IUserState) => state.user)
 
 	const params = new URLSearchParams(location.search)
 
-	const id = params.get('page')
+	const page = params.get('page')
 
 	const loadArticles = async () => {
 		setLoading(true)
-		await dispatch(getArticles(id ? Number(id) : 1))
+		await dispatch(getArticles(page ? Number(page) : 1, token))
 		setLoading(false)
 	}
 
 	useEffect(() => {
 		loadArticles()
-	}, [id])
+	}, [page])
 
 	if (loading) {
 		return (
@@ -114,7 +115,7 @@ const ArticleList: React.FC = () => {
 					style={{
 						margin: '20px 0 50px',
 					}}
-					current={id ? Number(id) : 1}
+					current={page ? Number(page) : 1}
 					total={Math.floor(articlesCount / 20) * 10}
 					onChange={e => {
 						navigate(`?page=${e}`)

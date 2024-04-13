@@ -14,6 +14,7 @@ const ArticleItem = ({
 	favoritesCount,
 	tagList,
 	slug,
+	favorited,
 }: ArticleItemProps) => {
 	const navigate = useNavigate()
 
@@ -52,7 +53,7 @@ const ArticleItem = ({
 					? description
 					: 'The user has not added a description yet.'}
 			</p>
-			<Rate favoritesCount={favoritesCount} />
+			<Rate favoritesCount={favoritesCount} favorited={favorited} slug={slug} />
 		</li>
 	)
 }

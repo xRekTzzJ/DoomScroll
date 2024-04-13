@@ -1,17 +1,73 @@
+import { LoadingOutlined } from '@ant-design/icons'
+import { Spin } from 'antd'
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import activeLike from '../assets/img/active-like.svg'
 import like from '../assets/img/like.svg'
-import { RateProps } from '../core/types/types'
+import { useAppDispatch } from '../core/hooks/hooks'
+import { favoriteAnArticle } from '../core/services/realworld-service'
+import { IProfileUserState, RateProps } from '../core/types/types'
 import classes from '../styles/rate.module.scss'
 
-const Rate = ({ favoritesCount }: RateProps) => {
+const Rate = ({ favoritesCount, favorited, slug = '' }: RateProps) => {
+	const token = useSelector((state: IProfileUserState) => state.user.token)
+	const [isFavorited, setIsFavorited] = useState(favorited)
+	const [favortiedCount, setFavoritedCount] = useState(favoritesCount)
+
+	const [loading, setLoading] = useState(false)
+
+	const rateClasses = token
+		? classes['rate-container']
+		: `${classes['rate-container']} ${classes['rate-container_disabled']}`
+
+	const dispatch = useAppDispatch()
+
+	if (loading) {
+		return (
+			<div className={rateClasses}>
+				<Spin
+					indicator={
+						<LoadingOutlined
+							style={{
+								color: 'red',
+								fontSize: 20,
+							}}
+							spin
+						/>
+					}
+				/>
+			</div>
+		)
+	}
+
 	return (
 		<div
-			className={classes['rate-container']}
-			onClick={e => {
+			className={rateClasses}
+			onClick={async e => {
 				e.stopPropagation()
+
+				if (!token || loading) return
+
+				setLoading(true)
+				try {
+					if (isFavorited) {
+						await favoriteAnArticle(slug, token)
+						setIsFavorited(false)
+						setFavoritedCount(state => state - 1)
+					} else {
+						await favoriteAnArticle(slug, token)
+						setIsFavorited(true)
+						setFavoritedCount(state => state + 1)
+					}
+				} catch {
+					return
+				} finally {
+					setLoading(false)
+				}
 			}}
 		>
-			<img src={like} alt='Like button.' />
-			<span>{favoritesCount}</span>
+			<img src={isFavorited ? activeLike : like} alt='Like button.' />
+			<span>{favortiedCount}</span>
 		</div>
 	)
 }

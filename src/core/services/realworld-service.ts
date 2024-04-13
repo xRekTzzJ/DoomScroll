@@ -116,3 +116,31 @@ export const updateUser = async (userData: IUserData, key: string) => {
 	localStorage.setItem('user', JSON.stringify(result.user))
 	return result.user
 }
+
+export const favoriteAnArticle = async (slug: string, key: string) => {
+	const data = await fetch(`${baseURL}articles/${slug}/favorite`, {
+		method: 'POST',
+		headers: {
+			Authorization: `Token ${key}`,
+		},
+	})
+	if (!data.ok) {
+		throw data
+	}
+	const response = await data.json()
+	return response.article
+}
+
+export const unfavoriteAnArticle = async (slug: string, key: string) => {
+	const data = await fetch(`${baseURL}articles/${slug}/favorite`, {
+		method: 'DELETE',
+		headers: {
+			Authorization: `Token ${key}`,
+		},
+	})
+	if (!data.ok) {
+		throw data
+	}
+	const response = await data.json()
+	return response.article
+}
