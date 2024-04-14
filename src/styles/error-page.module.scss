@@ -9,6 +9,15 @@
 	justify-content: center;
 	color: #ffffff;
 
+	@media screen and (max-width: 500px) {
+		span {
+			font-size: 18px !important;
+		}
+		a {
+			font-size: 18px !important;
+		}
+	}
+
 	span {
 		font-size: 44px;
 		margin: 0;

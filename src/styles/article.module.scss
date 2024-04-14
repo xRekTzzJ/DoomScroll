@@ -9,6 +9,103 @@
 	border-radius: 20px;
 	transition: 0.3s;
 
+	@media screen and (max-width: 1600px) {
+		width: 1200px;
+
+		&__title {
+			max-width: 800px !important;
+		}
+
+		&__description {
+			width: 1000px !important;
+		}
+
+		&__tag-container {
+			max-width: 1000px !important;
+		}
+	}
+
+	@media screen and (max-width: 1400px) {
+		width: 1000px;
+
+		&__description {
+			max-width: 800px !important ;
+		}
+	}
+
+	@media screen and (max-width: 1050px) {
+		width: 800px;
+
+		&__tag-container {
+			max-width: 550px !important;
+		}
+
+		&__title {
+			max-width: 550px !important;
+		}
+
+		&__description {
+			max-width: 650px !important;
+		}
+	}
+
+	@media screen and (max-width: 900px) {
+		width: 700px;
+
+		&__tag-container {
+			max-width: 500px !important;
+		}
+
+		&__title {
+			max-width: 500px !important;
+		}
+
+		&__description {
+			max-width: 600px !important;
+		}
+	}
+
+	@media screen and (max-width: 750px) {
+		width: 600px;
+
+		&__tag-container {
+			max-width: 400px !important;
+		}
+
+		&__title {
+			max-width: 400px !important;
+		}
+
+		&__description {
+			max-width: 500px !important;
+		}
+	}
+
+	@media screen and (max-width: 650px) {
+		width: 500px;
+
+		&__tag-container {
+			max-width: 100% !important;
+		}
+
+		&__title {
+			max-width: 100% !important;
+		}
+
+		&__description {
+			max-width: 80% !important;
+		}
+	}
+
+	@media screen and (max-width: 550px) {
+		width: 400px;
+	}
+
+	@media screen and (max-width: 450px) {
+		width: 350px;
+		padding: 10px !important;
+	}
+
 	&__header {
 		display: grid;
 		margin: 0;

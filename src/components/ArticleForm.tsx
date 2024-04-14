@@ -184,7 +184,7 @@ const ArticleForm = () => {
 										borderColor: '#1890FF',
 									}}
 								>
-									Add tag
+									Add
 								</button>
 							) : null}
 						</div>
