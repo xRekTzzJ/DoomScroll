@@ -78,7 +78,6 @@ const Profile = () => {
 						<LoadingOutlined
 							style={{
 								width: '100%',
-								color: '#52c41a',
 								fontSize: 48,
 							}}
 							spin

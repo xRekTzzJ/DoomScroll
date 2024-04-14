@@ -20,6 +20,7 @@ import UserImage from './UserImage'
 const CommentList = ({ slug }: { slug: string }) => {
 	const [commentState, setCommentState] = useState(false)
 	const [loading, setLoading] = useState(false)
+	const [sendingComment, setSendingComment] = useState(false)
 
 	const { comments } = useSelector((state: IArticleState) => state.article)
 	const { token, username } = useSelector((state: IUserState) => state.user)
@@ -34,12 +35,17 @@ const CommentList = ({ slug }: { slug: string }) => {
 		mode: 'onChange',
 	})
 
-	const onSubmit = (inputs: Inputs) => {
+	const onSubmit = async (inputs: Inputs) => {
 		if (inputs.body.trim().length) {
+			setSendingComment(true)
 			try {
-				dispatch(createComment(slug, token ? token : '', inputs.body.trim()))
+				await dispatch(
+					createComment(slug, token ? token : '', inputs.body.trim())
+				)
 			} catch {
 				toast.error('Something went wrong!')
+			} finally {
+				setSendingComment(false)
 			}
 		}
 		reset()
@@ -122,12 +128,30 @@ const CommentList = ({ slug }: { slug: string }) => {
 						disabled: Boolean(!token),
 					})}
 				/>
-				<button
-					disabled={Boolean(!token)}
-					style={{ opacity: token ? '1' : '0.4', cursor: 'default' }}
-				>
-					Send
-				</button>
+				{sendingComment ? (
+					<Spin
+						style={{
+							display: 'block',
+							margin: '0 auto',
+						}}
+						indicator={
+							<LoadingOutlined
+								style={{
+									fontSize: 24,
+									color: 'white',
+								}}
+								spin
+							/>
+						}
+					/>
+				) : (
+					<button
+						disabled={Boolean(!token)}
+						style={{ opacity: token ? '1' : '0.4', cursor: 'default' }}
+					>
+						Send
+					</button>
+				)}
 			</form>
 		)
 	}
