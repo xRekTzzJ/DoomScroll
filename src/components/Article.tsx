@@ -5,7 +5,9 @@ import { useEffect, useState } from 'react'
 import Markdown from 'react-markdown'
 import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { useAppDispatch } from '../core/hooks/hooks'
+import { deleteArticle } from '../core/services/realworld-service'
 import { getArticle } from '../core/store/actions'
 import { IArticleState, IUserState } from '../core/types/types'
 import classes from '../styles/article.module.scss'
@@ -61,6 +63,16 @@ const Article = () => {
 		)
 	}
 
+	const confirm = async () => {
+		try {
+			await deleteArticle(slug, token)
+			navigate('/')
+			toast.success('You have successfully delete an article!')
+		} catch {
+			toast.error('Something went wrong!')
+		}
+	}
+
 	return (
 		<section className={classes['article']}>
 			{username === author.username && (
@@ -70,6 +82,7 @@ const Article = () => {
 						description='Are you sure to delete this article?'
 						okText='Yes'
 						cancelText='No'
+						onConfirm={confirm}
 						icon={
 							<QuestionCircleOutlined
 								style={{

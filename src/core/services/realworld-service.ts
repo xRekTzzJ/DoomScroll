@@ -182,3 +182,17 @@ export const updateArticle = async (
 	const response = await data.json()
 	return response
 }
+
+export const deleteArticle = async (slug: string = '', key: string = '') => {
+	const data = await fetch(`${baseURL}articles/${slug}`, {
+		method: 'DELETE',
+		headers: {
+			accept: 'application/json',
+			'Content-Type': 'application/json;charset=utf-8',
+			Authorization: `Token ${key}`,
+		},
+	})
+	if (!data.ok) {
+		throw data
+	}
+}
