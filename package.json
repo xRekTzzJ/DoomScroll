@@ -9,8 +9,6 @@
 		"@testing-library/user-event": "^13.5.0",
 		"@types/jest": "^27.5.2",
 		"@types/node": "^16.18.96",
-		"@types/react": "^18.2.75",
-		"@types/react-dom": "^18.2.24",
 		"antd": "^5.15.1",
 		"date-fns": "^3.6.0",
 		"lodash": "^4.17.21",
@@ -54,5 +52,9 @@
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
+	},
+	"devDependencies": {
+		"@types/react": "^18.2.78",
+		"@types/react-dom": "^18.2.25"
 	}
 }

@@ -2,10 +2,13 @@ import { LoadingOutlined } from '@ant-design/icons'
 import { Spin } from 'antd'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 import activeLike from '../assets/img/active-like.svg'
 import like from '../assets/img/like.svg'
-import { useAppDispatch } from '../core/hooks/hooks'
-import { favoriteAnArticle } from '../core/services/realworld-service'
+import {
+	favoriteAnArticle,
+	unfavoriteAnArticle,
+} from '../core/services/realworld-service'
 import { IProfileUserState, RateProps } from '../core/types/types'
 import classes from '../styles/rate.module.scss'
 
@@ -20,8 +23,6 @@ const Rate = ({ favoritesCount, favorited, slug = '' }: RateProps) => {
 		? classes['rate-container']
 		: `${classes['rate-container']} ${classes['rate-container_disabled']}`
 
-	const dispatch = useAppDispatch()
-
 	if (loading) {
 		return (
 			<div className={rateClasses}>
@@ -29,7 +30,6 @@ const Rate = ({ favoritesCount, favorited, slug = '' }: RateProps) => {
 					indicator={
 						<LoadingOutlined
 							style={{
-								color: 'red',
 								fontSize: 20,
 							}}
 							spin
@@ -51,7 +51,7 @@ const Rate = ({ favoritesCount, favorited, slug = '' }: RateProps) => {
 				setLoading(true)
 				try {
 					if (isFavorited) {
-						await favoriteAnArticle(slug, token)
+						await unfavoriteAnArticle(slug, token)
 						setIsFavorited(false)
 						setFavoritedCount(state => state - 1)
 					} else {
@@ -60,7 +60,7 @@ const Rate = ({ favoritesCount, favorited, slug = '' }: RateProps) => {
 						setFavoritedCount(state => state + 1)
 					}
 				} catch {
-					return
+					toast.error('Something went wrong!')
 				} finally {
 					setLoading(false)
 				}
