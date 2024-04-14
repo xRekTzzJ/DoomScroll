@@ -148,7 +148,7 @@ export const unfavoriteAnArticle = async (slug: string, key: string) => {
 	return response.article
 }
 
-export const createArticle = async (articleData: any, key: string = '') => {
+export const createArticle = async (articleData: unknown, key: string = '') => {
 	const data = await fetch(`${baseURL}articles`, {
 		method: 'POST',
 		headers: {
@@ -166,7 +166,7 @@ export const createArticle = async (articleData: any, key: string = '') => {
 }
 
 export const updateArticle = async (
-	articleData: any,
+	articleData: unknown,
 	slug: string,
 	key: string = ''
 ) => {
