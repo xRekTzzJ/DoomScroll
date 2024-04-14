@@ -147,7 +147,10 @@ const CommentList = ({ slug }: { slug: string }) => {
 				) : (
 					<button
 						disabled={Boolean(!token)}
-						style={{ opacity: token ? '1' : '0.4', cursor: 'default' }}
+						style={{
+							opacity: token ? '1' : '0.4',
+							cursor: token ? 'pointer' : 'default',
+						}}
 					>
 						Send
 					</button>
