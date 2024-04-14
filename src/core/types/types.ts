@@ -71,6 +71,16 @@ export interface IProfileUserState {
 	}
 }
 
+export interface ICreateArticle {
+	title: string
+	description: string
+	body: string
+	tagList: {
+		value: string
+		isAdded: boolean
+	}[]
+}
+
 export type ArticleItemProps = {
 	image?: string
 	username: string

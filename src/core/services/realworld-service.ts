@@ -144,3 +144,41 @@ export const unfavoriteAnArticle = async (slug: string, key: string) => {
 	const response = await data.json()
 	return response.article
 }
+
+export const createArticle = async (articleData: any, key: string = '') => {
+	const data = await fetch(`${baseURL}articles`, {
+		method: 'POST',
+		headers: {
+			accept: 'application/json',
+			'Content-Type': 'application/json;charset=utf-8',
+			Authorization: `Token ${key}`,
+		},
+		body: JSON.stringify({ article: articleData }),
+	})
+	if (!data.ok) {
+		throw data
+	}
+	const response = await data.json()
+	return response
+}
+
+export const updateArticle = async (
+	articleData: any,
+	slug: string,
+	key: string = ''
+) => {
+	const data = await fetch(`${baseURL}articles/${slug}`, {
+		method: 'PUT',
+		headers: {
+			accept: 'application/json',
+			'Content-Type': 'application/json;charset=utf-8',
+			Authorization: `Token ${key}`,
+		},
+		body: JSON.stringify({ article: articleData }),
+	})
+	if (!data.ok) {
+		throw data
+	}
+	const response = await data.json()
+	return response
+}

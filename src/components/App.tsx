@@ -7,6 +7,7 @@ import { useAppDispatch } from '../core/hooks/hooks'
 import { checkAuth } from '../core/store/actions'
 import ArticleListPage from '../pages/ArticleListPage'
 import ArticlePage from '../pages/ArticlePage'
+import EditArticlePage from '../pages/EditArticlePage'
 import NotFoundPage from '../pages/NotFoundPage'
 import ProfilePage from '../pages/ProfilePage'
 import SignInPage from '../pages/SignInPage'
@@ -57,6 +58,10 @@ const App: React.FC = () => {
 		{
 			path: '/profile',
 			element: <ProfilePage />,
+		},
+		{
+			path: '/new-article',
+			element: <EditArticlePage />,
 		},
 	])
 
