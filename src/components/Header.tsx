@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { IUserState } from '../core/types/types'
+import classes from '../styles/header.module.scss'
 import HeaderProfile from './HeaderProfile'
 import LogOutModal from './LogOutModal'
 import SignButtons from './SignButtons'
@@ -18,7 +19,7 @@ const Header: React.FC = () => {
 	}
 
 	return (
-		<header className='header'>
+		<header className={classes['header']}>
 			<Link to='/articles/'>DoomScroll Blog</Link>
 			{token ? (
 				<HeaderProfile
@@ -33,7 +34,7 @@ const Header: React.FC = () => {
 				<LogOutModal active={logOutModal} logOutHandler={logOutHandler} />
 			) : null}
 			<svg
-				className='header__paint'
+				className={classes['header__paint']}
 				width='827'
 				height='1573'
 				viewBox='0 0 827 1573'

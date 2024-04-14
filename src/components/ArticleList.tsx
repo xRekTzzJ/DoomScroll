@@ -7,6 +7,8 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../core/hooks/hooks'
 import { getArticles } from '../core/store/actions'
 import { IArticle, IArticlesState, IUserState } from '../core/types/types'
+import wrapperClass from '../styles/article-list-wrapper.module.scss'
+import articleListClasses from '../styles/article-list.module.scss'
 import ArticleItem from './ArticleItem'
 
 const ArticleList: React.FC = () => {
@@ -44,7 +46,7 @@ const ArticleList: React.FC = () => {
 
 	if (loading) {
 		return (
-			<section className='article-list-wrapper'>
+			<section className={wrapperClass['article-list-wrapper']}>
 				<Spin
 					indicator={<LoadingOutlined style={{ fontSize: 50 }} spin />}
 					style={{
@@ -58,7 +60,7 @@ const ArticleList: React.FC = () => {
 
 	if (error) {
 		return (
-			<section className={'article-list'}>
+			<section className={articleListClasses['article-list']}>
 				<Alert
 					style={{
 						width: 900,
@@ -73,7 +75,7 @@ const ArticleList: React.FC = () => {
 	}
 
 	return (
-		<section className='article-list-wrapper'>
+		<section className={wrapperClass['article-list-wrapper']}>
 			<svg
 				style={{
 					position: 'absolute',
@@ -101,7 +103,7 @@ const ArticleList: React.FC = () => {
 					</clipPath>
 				</defs>
 			</svg>
-			<ul className='article-list'>
+			<ul className={articleListClasses['article-list']}>
 				{articles.map((i: IArticle) => {
 					return (
 						<ArticleItem

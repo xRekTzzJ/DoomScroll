@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import classes from '../styles/header.module.scss'
 import UserImage from './UserImage'
 
 const HeaderProfile = ({
@@ -11,9 +12,9 @@ const HeaderProfile = ({
 	logOutHandler: (arg: boolean) => void
 }) => {
 	return (
-		<div className='header__profile-container'>
+		<div className={classes['header__profile-container']}>
 			<Link to='/new-article'>Create article</Link>
-			<Link className='header__profile' to='/profile'>
+			<Link className={classes['header__profile']} to='/profile'>
 				<div>
 					<span>{username}</span>
 					<UserImage image={image} />
