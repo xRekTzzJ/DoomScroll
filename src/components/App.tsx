@@ -63,6 +63,10 @@ const App: React.FC = () => {
 			path: '/new-article',
 			element: <EditArticlePage />,
 		},
+		{
+			path: '/articles/:slug/edit',
+			element: <EditArticlePage />,
+		},
 	])
 
 	if (loading) {

@@ -4,7 +4,7 @@ import { format } from 'date-fns'
 import { useEffect, useState } from 'react'
 import Markdown from 'react-markdown'
 import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useAppDispatch } from '../core/hooks/hooks'
 import { getArticle } from '../core/store/actions'
 import { IArticleState, IUserState } from '../core/types/types'
@@ -15,6 +15,7 @@ import UserImage from './UserImage'
 const Article = () => {
 	const dispatch = useAppDispatch()
 	const [loading, setLoading] = useState(true)
+	const navigate = useNavigate()
 
 	const { slug } = useParams()
 
@@ -88,6 +89,11 @@ const Article = () => {
 					<button
 						style={{
 							color: '#52c41a',
+						}}
+						onClick={() => {
+							navigate('edit', {
+								state: { slug },
+							})
 						}}
 					>
 						Edit
