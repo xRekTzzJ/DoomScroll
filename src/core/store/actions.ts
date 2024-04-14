@@ -115,7 +115,9 @@ export const createComment = (
 	}
 }
 
-export const changeTheme = (bool: boolean) => {
+export const changeTheme = (bool: boolean = false) => {
+	localStorage.setItem('theme', String(bool))
+
 	return {
 		type: 'CHANGE_THEME',
 		payload: bool,

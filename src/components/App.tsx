@@ -5,7 +5,7 @@ import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 
 import { useSelector } from 'react-redux'
 import { useAppDispatch } from '../core/hooks/hooks'
-import { checkAuth } from '../core/store/actions'
+import { changeTheme, checkAuth } from '../core/store/actions'
 import ArticleListPage from '../pages/ArticleListPage'
 import ArticlePage from '../pages/ArticlePage'
 import EditArticlePage from '../pages/EditArticlePage'
@@ -18,7 +18,13 @@ const App: React.FC = () => {
 	const [loading, setLoading] = useState(true)
 	const dispatch = useAppDispatch()
 	const theme = useSelector((state: { theme: boolean }) => state.theme)
+
 	const initialState = async () => {
+		try {
+			dispatch(changeTheme(localStorage.getItem('theme') === 'true'))
+		} catch {
+			dispatch(changeTheme())
+		}
 		try {
 			await dispatch(
 				checkAuth(JSON.parse(localStorage.getItem('user') || '{}'))
