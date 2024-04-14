@@ -83,7 +83,10 @@ const ArticleForm = () => {
 		}
 	}
 
-	const onAddTag = (index: number, array: any) => {
+	const onAddTag = (
+		index: number,
+		array: { value: string; isAdded?: boolean }[]
+	) => {
 		if (array.length === 6) {
 			return
 		}

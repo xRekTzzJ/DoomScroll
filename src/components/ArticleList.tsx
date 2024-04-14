@@ -53,7 +53,6 @@ const ArticleList: React.FC = () => {
 						margin: 'auto',
 					}}
 				/>
-				;
 			</section>
 		)
 	}
