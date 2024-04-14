@@ -17,6 +17,8 @@ import UserImage from './UserImage'
 const Article = () => {
 	const dispatch = useAppDispatch()
 	const [loading, setLoading] = useState(true)
+	const [error, setError] = useState(false)
+
 	const navigate = useNavigate()
 
 	const { slug } = useParams()
@@ -34,8 +36,13 @@ const Article = () => {
 	const { username, token } = useSelector((state: IUserState) => state.user)
 
 	const loadArticle = async (slug = '') => {
-		await dispatch(getArticle(slug, token))
-		setLoading(false)
+		try {
+			await dispatch(getArticle(slug, token))
+		} catch {
+			setError(true)
+		} finally {
+			setLoading(false)
+		}
 	}
 
 	useEffect(() => {
@@ -59,6 +66,26 @@ const Article = () => {
 						/>
 					}
 				/>
+			</section>
+		)
+	}
+
+	if (error) {
+		return (
+			<section className={classes['article']}>
+				<div className={classes['article__header']}>
+					<h2 className={classes['article__title']}>Error 404.</h2>
+					<div className={classes['article__person-info']}>
+						<span></span>
+						<span></span>
+						<span>username</span>
+						<UserImage image='' />
+					</div>
+				</div>
+				<p className={classes['article__description']} style={{ color: 'red' }}>
+					Article not found.
+				</p>
+				<div className={classes['article__markdown']}></div>
 			</section>
 		)
 	}

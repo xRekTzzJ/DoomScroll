@@ -27,7 +27,7 @@ const ArticleForm = () => {
 		(state: IArticleState) => state.article
 	)
 
-	const renderArticle = async () => {
+	const loadArticle = async () => {
 		try {
 			await dispatch(getArticle(slug, token))
 			setLoading(false)
@@ -45,7 +45,7 @@ const ArticleForm = () => {
 			reset()
 			setLoading(false)
 		} else {
-			renderArticle()
+			loadArticle()
 		}
 	}, [slug])
 
@@ -202,7 +202,6 @@ const ArticleForm = () => {
 						<LoadingOutlined
 							style={{
 								width: '100%',
-								color: '#52c41a',
 								fontSize: 48,
 							}}
 							spin

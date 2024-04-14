@@ -1,5 +1,5 @@
 import { LoadingOutlined } from '@ant-design/icons'
-import { ConfigProvider, Pagination, Spin } from 'antd'
+import { Alert, ConfigProvider, Pagination, Spin } from 'antd'
 import { useEffect, useState } from 'react'
 
 import { useSelector } from 'react-redux'
@@ -12,6 +12,7 @@ import ArticleItem from './ArticleItem'
 const ArticleList: React.FC = () => {
 	const navigate = useNavigate()
 	const location = useLocation()
+	const [error, setError] = useState(false)
 
 	const [loading, setLoading] = useState(true)
 
@@ -27,9 +28,14 @@ const ArticleList: React.FC = () => {
 	const page = params.get('page')
 
 	const loadArticles = async () => {
-		setLoading(true)
-		await dispatch(getArticles(page ? Number(page) : 1, token))
-		setLoading(false)
+		try {
+			setLoading(true)
+			await dispatch(getArticles(page ? Number(page) : 1, token))
+		} catch (error) {
+			setError(true)
+		} finally {
+			setLoading(false)
+		}
 	}
 
 	useEffect(() => {
@@ -46,6 +52,22 @@ const ArticleList: React.FC = () => {
 					}}
 				/>
 				;
+			</section>
+		)
+	}
+
+	if (error) {
+		return (
+			<section className={'article-list'}>
+				<Alert
+					style={{
+						width: 900,
+					}}
+					message='The service is temporarily unavailable.'
+					description='Please try again later.'
+					type='error'
+					showIcon
+				/>
 			</section>
 		)
 	}
