@@ -36,12 +36,15 @@ export const getArticle = async (slug: string, key?: string) => {
 			: {}
 	)
 
+	const commentsResponse = await fetch(`${baseURL}articles/${slug}/comments`)
+	const commentsData = await commentsResponse.json()
+
 	if (!data.ok) {
 		throw data
 	}
 
 	const response = await data.json()
-	return response.article
+	return { ...response.article, ...commentsData }
 }
 
 export const registerNewUser = async (userData: IUserData) => {

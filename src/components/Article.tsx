@@ -11,6 +11,7 @@ import { deleteArticle } from '../core/services/realworld-service'
 import { getArticle } from '../core/store/actions'
 import { IArticleState, IUserState } from '../core/types/types'
 import classes from '../styles/article.module.scss'
+import CommentList from './CommentList'
 import Rate from './Rate'
 import UserImage from './UserImage'
 
@@ -183,6 +184,7 @@ const Article = () => {
 			<div className={classes['article__markdown']}>
 				<Markdown>{body}</Markdown>
 			</div>
+			<CommentList slug={slug ? slug : ''} />
 		</section>
 	)
 }

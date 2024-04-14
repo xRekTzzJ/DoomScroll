@@ -16,6 +16,7 @@ export interface IArticle {
 	favorited: boolean
 	favoritesCount: number
 	author: IAuthor
+	comments: { id: string; body: string; createdAt: string; author: IAuthor }[]
 }
 
 export interface IArticleState {
