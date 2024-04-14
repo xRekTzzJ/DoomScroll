@@ -20,6 +20,7 @@ const ArticleForm = () => {
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 	const location = useLocation()
+	const theme = useSelector((state: { theme: boolean }) => state.theme)
 	const [loading, setLoading] = useState(true)
 	const slug = location.state ? location.state.slug : undefined
 	const token = useSelector((state: IUserState) => state.user.token)
@@ -199,7 +200,13 @@ const ArticleForm = () => {
 
 	if (loading) {
 		return (
-			<section className={classes['article-form']}>
+			<section
+				className={
+					theme
+						? `${classes['article-form']} ${classes['article-form_light']}`
+						: classes['article-form']
+				}
+			>
 				<Spin
 					indicator={
 						<LoadingOutlined
@@ -216,7 +223,13 @@ const ArticleForm = () => {
 	}
 
 	return (
-		<section className={classes['article-form']}>
+		<section
+			className={
+				theme
+					? `${classes['article-form']} ${classes['article-form_light']}`
+					: classes['article-form']
+			}
+		>
 			{slug ? <h2>Edit article</h2> : <h2>Create new article</h2>}
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<div>

@@ -114,3 +114,10 @@ export const createComment = (
 		})
 	}
 }
+
+export const changeTheme = (bool: boolean) => {
+	return {
+		type: 'CHANGE_THEME',
+		payload: bool,
+	}
+}

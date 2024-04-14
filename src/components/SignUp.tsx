@@ -2,6 +2,7 @@ import { LoadingOutlined } from '@ant-design/icons'
 import { Spin } from 'antd'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useAppDispatch } from '../core/hooks/hooks'
@@ -12,6 +13,8 @@ import classes from '../styles/form.module.scss'
 const SignUp = () => {
 	const [loading, setLoading] = useState(false)
 	const [agree, setAgree] = useState(false)
+
+	const theme = useSelector((state: { theme: boolean }) => state.theme)
 
 	const dispatch = useAppDispatch()
 
@@ -51,7 +54,13 @@ const SignUp = () => {
 
 	if (loading) {
 		return (
-			<section className={classes['form']}>
+			<section
+				className={
+					theme
+						? `${classes['form']} ${classes['form_light']}`
+						: classes['form']
+				}
+			>
 				<Spin
 					indicator={
 						<LoadingOutlined
@@ -68,7 +77,11 @@ const SignUp = () => {
 	}
 
 	return (
-		<section className={classes['form']}>
+		<section
+			className={
+				theme ? `${classes['form']} ${classes['form_light']}` : classes['form']
+			}
+		>
 			<h2>Create new account</h2>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<div>
@@ -223,12 +236,7 @@ const SignUp = () => {
 						checked={agree}
 						onChange={() => setAgree(agree => !agree)}
 					/>
-					<label
-						htmlFor='checkbox'
-						style={{
-							color: '#F5222D',
-						}}
-					>
+					<label htmlFor='checkbox'>
 						I agree to the processing of my personal information
 					</label>
 				</div>

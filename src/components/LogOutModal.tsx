@@ -1,5 +1,6 @@
 import { ConfigProvider, Modal } from 'antd'
 
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useAppDispatch } from '../core/hooks/hooks'
@@ -14,6 +15,8 @@ const LogOutModal = ({
 }) => {
 	const dispatch = useAppDispatch()
 
+	const theme = useSelector((state: { theme: boolean }) => state.theme)
+
 	const navigate = useNavigate()
 
 	return (
@@ -21,10 +24,10 @@ const LogOutModal = ({
 			theme={{
 				components: {
 					Modal: {
-						headerBg: '#2C2C54',
-						contentBg: '#2C2C54',
-						titleColor: '#ffffff',
-						colorText: '#f0f0f0',
+						headerBg: theme ? '#f0f0f0' : '#2C2C54',
+						contentBg: theme ? '#f0f0f0' : '#2C2C54',
+						titleColor: theme ? '#2C2C54' : '#ffffff',
+						colorText: theme ? '#2C2C54' : '#ffffff',
 						borderRadiusLG: 20,
 					},
 				},

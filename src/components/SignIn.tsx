@@ -2,6 +2,7 @@ import { LoadingOutlined } from '@ant-design/icons'
 import { Spin } from 'antd'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useAppDispatch } from '../core/hooks/hooks'
@@ -11,6 +12,8 @@ import classes from '../styles/form.module.scss'
 
 const SignIn = () => {
 	const dispatch = useAppDispatch()
+
+	const theme = useSelector((state: { theme: boolean }) => state.theme)
 
 	const navigate = useNavigate()
 
@@ -59,7 +62,13 @@ const SignIn = () => {
 
 	if (loading) {
 		return (
-			<section className={classes['form']}>
+			<section
+				className={
+					theme
+						? `${classes['form']} ${classes['form_light']}`
+						: classes['form']
+				}
+			>
 				<Spin
 					indicator={
 						<LoadingOutlined
@@ -76,7 +85,11 @@ const SignIn = () => {
 	}
 
 	return (
-		<section className={classes['form']}>
+		<section
+			className={
+				theme ? `${classes['form']} ${classes['form_light']}` : classes['form']
+			}
+		>
 			<h2>Sign In</h2>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<div>

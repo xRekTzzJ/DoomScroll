@@ -3,6 +3,7 @@ import { Spin } from 'antd'
 import { useEffect, useState } from 'react'
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 
+import { useSelector } from 'react-redux'
 import { useAppDispatch } from '../core/hooks/hooks'
 import { checkAuth } from '../core/store/actions'
 import ArticleListPage from '../pages/ArticleListPage'
@@ -16,7 +17,7 @@ import SignUpPage from '../pages/SignUpPage'
 const App: React.FC = () => {
 	const [loading, setLoading] = useState(true)
 	const dispatch = useAppDispatch()
-
+	const theme = useSelector((state: { theme: boolean }) => state.theme)
 	const initialState = async () => {
 		try {
 			await dispatch(
@@ -27,6 +28,14 @@ const App: React.FC = () => {
 		} finally {
 			setLoading(false)
 		}
+	}
+
+	if (theme) {
+		document.body.classList.add('body_light')
+	}
+
+	if (!theme) {
+		document.body.classList.remove('body_light')
 	}
 
 	useEffect(() => {

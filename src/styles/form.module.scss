@@ -94,7 +94,7 @@
 		align-items: center;
 
 		label {
-			color: #f0f0f0 !important;
+			color: #f0f0f0;
 			margin: 0 !important;
 			padding: 0 !important;
 			cursor: pointer;
@@ -137,7 +137,7 @@
 		a {
 			margin: 0;
 			padding: 0;
-			color: #ffffff !important;
+			color: #ffffff;
 			cursor: pointer;
 			transition: 0.3s;
 			text-align: center !important;
@@ -147,5 +147,21 @@
 		a:hover {
 			color: #abacf0 !important;
 		}
+	}
+}
+
+.form_light {
+	background-color: #f0f0f0;
+
+	label {
+		color: #000000;
+	}
+
+	h2 {
+		color: #000000 !important;
+	}
+
+	a {
+		color: blue !important;
 	}
 }

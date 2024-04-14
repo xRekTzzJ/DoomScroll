@@ -14,6 +14,9 @@ import ArticleItem from './ArticleItem'
 const ArticleList: React.FC = () => {
 	const navigate = useNavigate()
 	const location = useLocation()
+
+	const theme = useSelector((state: { theme: boolean }) => state.theme)
+
 	const [error, setError] = useState(false)
 
 	const [loading, setLoading] = useState(true)
@@ -126,7 +129,7 @@ const ArticleList: React.FC = () => {
 						Pagination: {
 							itemActiveBg: '#686DE0',
 							colorPrimary: '#000000',
-							colorText: '#ffffff',
+							colorText: theme ? '#000000' : '#ffffff',
 							fontFamily: 'Helvetica Neue',
 							fontSize: 18,
 							colorPrimaryHover: '#ffffff',

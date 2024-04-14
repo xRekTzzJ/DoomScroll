@@ -4,7 +4,9 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import activeLike from '../assets/img/active-like.svg'
+import blackLike from '../assets/img/black-like.svg'
 import like from '../assets/img/like.svg'
+
 import {
 	favoriteAnArticle,
 	unfavoriteAnArticle,
@@ -16,6 +18,8 @@ const Rate = ({ favoritesCount, favorited, slug = '' }: RateProps) => {
 	const token = useSelector((state: IProfileUserState) => state.user.token)
 	const [isFavorited, setIsFavorited] = useState(favorited)
 	const [favortiedCount, setFavoritedCount] = useState(favoritesCount)
+
+	const theme = useSelector((state: { theme: boolean }) => state.theme)
 
 	const [loading, setLoading] = useState(false)
 
@@ -66,7 +70,10 @@ const Rate = ({ favoritesCount, favorited, slug = '' }: RateProps) => {
 				}
 			}}
 		>
-			<img src={isFavorited ? activeLike : like} alt='Like button.' />
+			<img
+				src={isFavorited ? activeLike : theme ? blackLike : like}
+				alt='Like button.'
+			/>
 			<span>{favortiedCount}</span>
 		</div>
 	)

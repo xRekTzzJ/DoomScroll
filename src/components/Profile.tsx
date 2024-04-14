@@ -17,6 +17,8 @@ import {
 import classes from '../styles/form.module.scss'
 
 const Profile = () => {
+	const theme = useSelector((state: { theme: boolean }) => state.theme)
+
 	const navigate = useNavigate()
 
 	const dispatch = useAppDispatch()
@@ -72,7 +74,13 @@ const Profile = () => {
 
 	if (loading) {
 		return (
-			<section className={classes['form']}>
+			<section
+				className={
+					theme
+						? `${classes['form']} ${classes['form_light']}`
+						: classes['form']
+				}
+			>
 				<Spin
 					indicator={
 						<LoadingOutlined
@@ -94,7 +102,11 @@ const Profile = () => {
 			: classes['form__button_disabled']
 
 	return (
-		<section className={classes['form']}>
+		<section
+			className={
+				theme ? `${classes['form']} ${classes['form_light']}` : classes['form']
+			}
+		>
 			<h2>Edit Profile</h2>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<div>

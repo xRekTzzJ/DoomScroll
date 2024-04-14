@@ -249,3 +249,21 @@
 		gap: 13px;
 	}
 }
+
+.article-item_light {
+	background-color: #f0f0f0;
+
+	h2 {
+		color: #000000;
+	}
+
+	span {
+		color: #000000 !important;
+		border-color: #000000 !important;
+	}
+
+	p {
+		color: #000000;
+		opacity: 0.7 !important;
+	}
+}

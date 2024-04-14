@@ -1,7 +1,15 @@
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
+import {
+	MenuFoldOutlined,
+	MenuUnfoldOutlined,
+	MoonOutlined,
+	SunOutlined,
+} from '@ant-design/icons'
+import { Switch } from 'antd'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { useAppDispatch } from '../core/hooks/hooks'
+import { changeTheme } from '../core/store/actions'
 import { IUserState } from '../core/types/types'
 import classes from '../styles/header.module.scss'
 import HeaderProfile from './HeaderProfile'
@@ -14,6 +22,10 @@ const Header: React.FC = () => {
 		(state: IUserState) => state.user
 	)
 
+	const dispatch = useAppDispatch()
+
+	const theme = useSelector((state: { theme: boolean }) => state.theme)
+
 	const [logOutModal, setLogOutModal] = useState(false)
 
 	const logOutHandler = (boolean: boolean) => {
@@ -22,7 +34,13 @@ const Header: React.FC = () => {
 
 	return (
 		<>
-			<header className={classes['header']}>
+			<header
+				className={
+					theme
+						? `${classes['header']} ${classes['header_light']}`
+						: classes['header']
+				}
+			>
 				<Link to='/articles/'>DoomScroll Blog</Link>
 				{token ? (
 					<HeaderProfile
@@ -114,6 +132,19 @@ const Header: React.FC = () => {
 					</defs>
 				</svg>
 			</header>
+			<Switch
+				style={{
+					width: '60px',
+					position: 'fixed',
+					bottom: '20px',
+					left: '20px',
+					zIndex: 1,
+				}}
+				checkedChildren={<SunOutlined />}
+				unCheckedChildren={<MoonOutlined />}
+				checked={theme}
+				onChange={e => dispatch(changeTheme(e))}
+			/>
 		</>
 	)
 }

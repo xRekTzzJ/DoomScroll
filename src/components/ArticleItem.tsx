@@ -1,4 +1,5 @@
 import { format } from 'date-fns'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { ArticleItemProps } from '../core/types/types'
 import classes from '../styles/article-item.module.scss'
@@ -18,8 +19,17 @@ const ArticleItem = ({
 }: ArticleItemProps) => {
 	const navigate = useNavigate()
 
+	const theme = useSelector((state: { theme: boolean }) => state.theme)
+
 	return (
-		<li className={classes['article-item']} onClick={() => navigate(slug)}>
+		<li
+			className={
+				theme
+					? `${classes['article-item']} ${classes['article-item_light']}`
+					: classes['article-item']
+			}
+			onClick={() => navigate(slug)}
+		>
 			<div className={classes['article-item__header']}>
 				<div className={classes['article-item__info-container']}>
 					<h2
