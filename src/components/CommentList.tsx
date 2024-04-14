@@ -9,6 +9,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 import { useAppDispatch } from '../core/hooks/hooks'
+import { deleteComment } from '../core/services/realworld-service'
 import { createComment } from '../core/store/actions'
 import { IArticleState, IUserState } from '../core/types/types'
 import classes from '../styles/comment-list.module.scss'
@@ -18,7 +19,7 @@ const CommentList = ({ slug }: { slug: string }) => {
 	const [commentState, setCommentState] = useState(false)
 
 	const { comments } = useSelector((state: IArticleState) => state.article)
-	const { token } = useSelector((state: IUserState) => state.user)
+	const { token, username } = useSelector((state: IUserState) => state.user)
 
 	const dispatch = useAppDispatch()
 
@@ -37,29 +38,38 @@ const CommentList = ({ slug }: { slug: string }) => {
 		reset()
 	}
 
+	const confirmHandler = (id: string, token: string, slug: string) => {
+		deleteComment(id, token ? token : '', slug)
+	}
+
 	const CommentsContainer = () => {
 		return (
 			<ul>
 				{comments.map(i => (
 					<li key={i.id}>
-						<Popconfirm
-							title='Delete the task'
-							description='Are you sure to delete this comment?'
-							okText='Yes'
-							cancelText='No'
-							placement='topLeft'
-							icon={
-								<QuestionCircleOutlined
-									style={{
-										color: 'red',
-									}}
+						{i.author.username === username && (
+							<Popconfirm
+								title='Delete the comment'
+								description='Are you sure to delete this comment?'
+								okText='Yes'
+								cancelText='No'
+								placement='topLeft'
+								onConfirm={() =>
+									confirmHandler(i.id, token ? token : '', slug ? slug : '')
+								}
+								icon={
+									<QuestionCircleOutlined
+										style={{
+											color: 'red',
+										}}
+									/>
+								}
+							>
+								<DeleteOutlined
+									className={classes['comment-list__delete-button']}
 								/>
-							}
-						>
-							<DeleteOutlined
-								className={classes['comment-list__delete-button']}
-							/>
-						</Popconfirm>
+							</Popconfirm>
+						)}
 						<p className={classes['comment-list__body']}>{i.body}</p>
 						<div className={classes['comment-list__person-info']}>
 							<span>{i.author.username}</span>
@@ -74,14 +84,20 @@ const CommentList = ({ slug }: { slug: string }) => {
 
 	const CommentForm = () => {
 		return (
-			<form onSubmit={handleSubmit(onSubmit)}>
+			<form onSubmit={handleSubmit(onSubmit)} style={{}}>
 				<input
 					placeholder='Write a comment.'
 					{...register('body', {
 						required: true,
+						disabled: Boolean(!token),
 					})}
 				/>
-				<button>Send</button>
+				<button
+					disabled={Boolean(!token)}
+					style={{ opacity: token ? '1' : '0.4', cursor: 'default' }}
+				>
+					Send
+				</button>
 			</form>
 		)
 	}

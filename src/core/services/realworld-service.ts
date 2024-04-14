@@ -218,3 +218,16 @@ export const newComment = async (
 
 	return { ...data.comment }
 }
+
+export const deleteComment = async (
+	id: string,
+	token: string,
+	slug: string
+) => {
+	const data = await fetch(`${baseURL}articles/${slug}/comments/${id}`, {
+		method: 'DELETE',
+		headers: {
+			Authorization: `Token ${token}`,
+		},
+	})
+}
