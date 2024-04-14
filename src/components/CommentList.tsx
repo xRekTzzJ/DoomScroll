@@ -1,22 +1,25 @@
 import {
 	DeleteOutlined,
 	DownOutlined,
+	LoadingOutlined,
 	QuestionCircleOutlined,
 } from '@ant-design/icons'
-import { Popconfirm } from 'antd'
+import { Popconfirm, Spin } from 'antd'
 import { format } from 'date-fns'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 import { useAppDispatch } from '../core/hooks/hooks'
 import { deleteComment } from '../core/services/realworld-service'
-import { createComment } from '../core/store/actions'
+import { createComment, getArticle } from '../core/store/actions'
 import { IArticleState, IUserState } from '../core/types/types'
 import classes from '../styles/comment-list.module.scss'
 import UserImage from './UserImage'
 
 const CommentList = ({ slug }: { slug: string }) => {
 	const [commentState, setCommentState] = useState(false)
+	const [loading, setLoading] = useState(false)
 
 	const { comments } = useSelector((state: IArticleState) => state.article)
 	const { token, username } = useSelector((state: IUserState) => state.user)
@@ -33,13 +36,13 @@ const CommentList = ({ slug }: { slug: string }) => {
 
 	const onSubmit = (inputs: Inputs) => {
 		if (inputs.body.trim().length) {
-			dispatch(createComment(slug, token ? token : '', inputs.body.trim()))
+			try {
+				dispatch(createComment(slug, token ? token : '', inputs.body.trim()))
+			} catch {
+				toast.error('Something went wrong!')
+			}
 		}
 		reset()
-	}
-
-	const confirmHandler = (id: string, token: string, slug: string) => {
-		deleteComment(id, token ? token : '', slug)
 	}
 
 	const CommentsContainer = () => {
@@ -47,16 +50,24 @@ const CommentList = ({ slug }: { slug: string }) => {
 			<ul>
 				{comments.map(i => (
 					<li key={i.id}>
-						{i.author.username === username && (
+						{i.author.username === username && !loading && (
 							<Popconfirm
 								title='Delete the comment'
 								description='Are you sure to delete this comment?'
 								okText='Yes'
 								cancelText='No'
 								placement='topLeft'
-								onConfirm={() =>
-									confirmHandler(i.id, token ? token : '', slug ? slug : '')
-								}
+								onConfirm={async () => {
+									setLoading(true)
+									try {
+										deleteComment(i.id, token ? token : '', slug)
+										await dispatch(getArticle(slug, token))
+									} catch {
+										toast.error('Something went wrong!')
+									} finally {
+										setLoading(false)
+									}
+								}}
 								icon={
 									<QuestionCircleOutlined
 										style={{
@@ -69,6 +80,25 @@ const CommentList = ({ slug }: { slug: string }) => {
 									className={classes['comment-list__delete-button']}
 								/>
 							</Popconfirm>
+						)}
+						{i.author.username === username && loading && (
+							<div className={classes['comment-list__delete-button']}>
+								<Spin
+									style={{
+										display: 'block',
+										margin: '0 auto',
+									}}
+									indicator={
+										<LoadingOutlined
+											style={{
+												fontSize: 24,
+												color: 'white',
+											}}
+											spin
+										/>
+									}
+								/>
+							</div>
 						)}
 						<p className={classes['comment-list__body']}>{i.body}</p>
 						<div className={classes['comment-list__person-info']}>

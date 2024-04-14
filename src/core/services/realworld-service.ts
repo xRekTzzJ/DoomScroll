@@ -214,6 +214,10 @@ export const newComment = async (
 		body: JSON.stringify({ comment: { body } }),
 	})
 
+	if (!response.ok) {
+		throw response
+	}
+
 	const data = await response.json()
 
 	return { ...data.comment }
@@ -224,10 +228,13 @@ export const deleteComment = async (
 	token: string,
 	slug: string
 ) => {
-	const data = await fetch(`${baseURL}articles/${slug}/comments/${id}`, {
+	const response = await fetch(`${baseURL}articles/${slug}/comments/${id}`, {
 		method: 'DELETE',
 		headers: {
 			Authorization: `Token ${token}`,
 		},
 	})
+	if (!response.ok) {
+		throw response
+	}
 }
