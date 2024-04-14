@@ -6,6 +6,7 @@ import {
 	getArticles as articles,
 	getUserInfo,
 	userLogin as login,
+	newComment,
 	registerNewUser as register,
 	updateUser as update,
 } from '../services/realworld-service'
@@ -97,6 +98,19 @@ export const updateUser = (
 		dispatch({
 			type: 'UPDATE_USER',
 			payload: await update(userdata, key),
+		})
+	}
+}
+
+export const createComment = (
+	slug: string,
+	token: string,
+	body: string
+): ThunkAction<void, RootState, unknown, UnknownAction> => {
+	return async dispatch => {
+		dispatch({
+			type: 'CREATE_COMMENT',
+			payload: await newComment(slug, token, body),
 		})
 	}
 }

@@ -199,3 +199,22 @@ export const deleteArticle = async (slug: string = '', key: string = '') => {
 		throw data
 	}
 }
+
+export const newComment = async (
+	slug: string,
+	token: string = '',
+	body: string
+) => {
+	const response = await fetch(`${baseURL}articles/${slug}/comments`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json;charset=utf-8',
+			Authorization: `Token ${token}`,
+		},
+		body: JSON.stringify({ comment: { body } }),
+	})
+
+	const data = await response.json()
+
+	return { ...data.comment }
+}

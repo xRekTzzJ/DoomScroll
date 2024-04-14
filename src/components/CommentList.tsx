@@ -1,9 +1,16 @@
-import { DownOutlined } from '@ant-design/icons'
+import {
+	DeleteOutlined,
+	DownOutlined,
+	QuestionCircleOutlined,
+} from '@ant-design/icons'
+import { Popconfirm } from 'antd'
 import { format } from 'date-fns'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
-import { IArticleState } from '../core/types/types'
+import { useAppDispatch } from '../core/hooks/hooks'
+import { createComment } from '../core/store/actions'
+import { IArticleState, IUserState } from '../core/types/types'
 import classes from '../styles/comment-list.module.scss'
 import UserImage from './UserImage'
 
@@ -11,25 +18,21 @@ const CommentList = ({ slug }: { slug: string }) => {
 	const [commentState, setCommentState] = useState(false)
 
 	const { comments } = useSelector((state: IArticleState) => state.article)
+	const { token } = useSelector((state: IUserState) => state.user)
+
+	const dispatch = useAppDispatch()
 
 	type Inputs = {
 		body: string
 	}
 
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-		watch,
-		setFocus,
-		reset,
-	} = useForm<Inputs>({
+	const { register, handleSubmit, reset } = useForm<Inputs>({
 		mode: 'onChange',
 	})
 
 	const onSubmit = (inputs: Inputs) => {
 		if (inputs.body.trim().length) {
-			console.log(inputs.body.trim())
+			dispatch(createComment(slug, token ? token : '', inputs.body.trim()))
 		}
 		reset()
 	}
@@ -39,6 +42,24 @@ const CommentList = ({ slug }: { slug: string }) => {
 			<ul>
 				{comments.map(i => (
 					<li key={i.id}>
+						<Popconfirm
+							title='Delete the task'
+							description='Are you sure to delete this comment?'
+							okText='Yes'
+							cancelText='No'
+							placement='topLeft'
+							icon={
+								<QuestionCircleOutlined
+									style={{
+										color: 'red',
+									}}
+								/>
+							}
+						>
+							<DeleteOutlined
+								className={classes['comment-list__delete-button']}
+							/>
+						</Popconfirm>
 						<p className={classes['comment-list__body']}>{i.body}</p>
 						<div className={classes['comment-list__person-info']}>
 							<span>{i.author.username}</span>
