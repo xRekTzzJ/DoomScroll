@@ -1,11 +1,11 @@
 import { LoadingOutlined } from '@ant-design/icons'
-import { Alert, ConfigProvider, Pagination, Spin } from 'antd'
+import { Alert, Button, ConfigProvider, Pagination, Spin } from 'antd'
 import { useEffect, useState } from 'react'
 
 import { useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../core/hooks/hooks'
-import { getArticles } from '../core/store/actions'
+import { allArticles, feedArticles, getArticles } from '../core/store/actions'
 import { IArticle, IArticlesState, IUserState } from '../core/types/types'
 import wrapperClass from '../styles/article-list-wrapper.module.scss'
 import articleListClasses from '../styles/article-list.module.scss'
@@ -17,9 +17,11 @@ const ArticleList: React.FC = () => {
 
 	const theme = useSelector((state: { theme: boolean }) => state.theme)
 
+	const filter = useSelector((state: { filter: string }) => state.filter)
+
 	const [error, setError] = useState(false)
 
-	const [loading, setLoading] = useState(true)
+	const [loading, setLoading] = useState(false)
 
 	const dispatch = useAppDispatch()
 
@@ -35,7 +37,7 @@ const ArticleList: React.FC = () => {
 	const loadArticles = async () => {
 		try {
 			setLoading(true)
-			await dispatch(getArticles(page ? Number(page) : 1, token))
+			await dispatch(getArticles(page ? Number(page) : 1, token, filter))
 		} catch (error) {
 			setError(true)
 		} finally {
@@ -45,7 +47,7 @@ const ArticleList: React.FC = () => {
 
 	useEffect(() => {
 		loadArticles()
-	}, [page])
+	}, [page, filter])
 
 	if (loading) {
 		return (
@@ -53,7 +55,9 @@ const ArticleList: React.FC = () => {
 				<Spin
 					indicator={<LoadingOutlined style={{ fontSize: 50 }} spin />}
 					style={{
+						fontSize: '54px',
 						margin: 'auto',
+						color: 'white',
 					}}
 				/>
 			</section>
@@ -63,6 +67,22 @@ const ArticleList: React.FC = () => {
 	if (error) {
 		return (
 			<section className={articleListClasses['article-list']}>
+				<div className={wrapperClass['article-list-wrapper__filter']}>
+					<Button
+						size='large'
+						type={filter === 'All' ? 'primary' : 'default'}
+						onClick={() => dispatch(allArticles)}
+					>
+						All articles
+					</Button>
+					<Button
+						size='large'
+						onClick={() => dispatch(feedArticles)}
+						type={filter === 'Feed' ? 'primary' : 'default'}
+					>
+						Followed
+					</Button>
+				</div>
 				<Alert
 					style={{
 						width: 900,
@@ -77,7 +97,27 @@ const ArticleList: React.FC = () => {
 	}
 
 	return (
-		<section className={wrapperClass['article-list-wrapper']}>
+		<section
+			className={wrapperClass['article-list-wrapper']}
+			style={{ margin: 0, height: '100%' }}
+		>
+			<div className={wrapperClass['article-list-wrapper__filter']}>
+				<Button
+					size='large'
+					type={filter === 'All' ? 'primary' : 'default'}
+					onClick={() => dispatch(allArticles)}
+				>
+					All articles
+				</Button>
+				<Button
+					size='large'
+					onClick={() => dispatch(feedArticles)}
+					type={filter === 'Feed' ? 'primary' : 'default'}
+				>
+					Followed
+				</Button>
+			</div>
+
 			<svg
 				style={{
 					position: 'absolute',
@@ -123,6 +163,16 @@ const ArticleList: React.FC = () => {
 					)
 				})}
 			</ul>
+			{!articles.length && (
+				<div
+					style={{
+						color: '#f0f0f0',
+						fontSize: '24px',
+					}}
+				>
+					There are no articles.
+				</div>
+			)}
 			<ConfigProvider
 				theme={{
 					components: {
@@ -139,10 +189,11 @@ const ArticleList: React.FC = () => {
 			>
 				<Pagination
 					style={{
+						display: articles.length ? 'flex' : 'none',
 						margin: '20px 0 50px',
 					}}
 					current={page ? Number(page) : 1}
-					total={Math.floor(articlesCount / 20) * 10}
+					total={articlesCount ? Math.floor(articlesCount / 20) * 10 : 0}
 					onChange={e => {
 						navigate(`?page=${e}`)
 					}}

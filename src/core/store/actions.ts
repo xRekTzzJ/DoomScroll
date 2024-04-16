@@ -4,6 +4,7 @@ import { RootState } from '.'
 import {
 	getArticle as article,
 	getArticles as articles,
+	feedArticles as feed,
 	getUserInfo,
 	userLogin as login,
 	newComment,
@@ -14,13 +15,22 @@ import { IUserData } from '../types/types'
 
 export const getArticles = (
 	page: number = 1,
-	key: string | undefined = undefined
+	key: string | undefined = undefined,
+	filter: string = 'All'
 ): ThunkAction<void, RootState, unknown, UnknownAction> => {
 	return async dispatch => {
-		dispatch({
-			type: 'GET_ARTICLES',
-			payload: await articles(page, key),
-		})
+		if (filter === 'All') {
+			dispatch({
+				type: 'GET_ARTICLES',
+				payload: await articles(page, key),
+			})
+		}
+		if (filter === 'Feed') {
+			dispatch({
+				type: 'GET_ARTICLES',
+				payload: await feed(page, key),
+			})
+		}
 	}
 }
 
@@ -122,4 +132,12 @@ export const changeTheme = (bool: boolean = false) => {
 		type: 'CHANGE_THEME',
 		payload: bool,
 	}
+}
+
+export const allArticles = {
+	type: 'All',
+}
+
+export const feedArticles = {
+	type: 'Feed',
 }

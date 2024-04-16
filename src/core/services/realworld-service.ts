@@ -288,3 +288,25 @@ export const unfollowUser = async (username: string, token: string = '') => {
 
 	return data.profile
 }
+
+export const feedArticles = async (page: number, key = '') => {
+	const data = await fetch(
+		`${baseURL}articles/feed?offset=${
+			page === 1 ? 0 : page === 2 ? 20 : page * 20
+		}`,
+		key.length
+			? {
+					headers: {
+						Authorization: `Token ${key}`,
+					},
+			  }
+			: {}
+	)
+	if (!data.ok) {
+		throw data
+	}
+
+	const response = await data.json()
+
+	return { ...response, page }
+}

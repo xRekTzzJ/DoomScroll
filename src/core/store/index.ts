@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { thunk } from 'redux-thunk'
 import articleReducer from './reducers/articleReducer'
 import articlesReducer from './reducers/articlesReducer'
+import filterReducer from './reducers/filterReducer'
 import themeReducer from './reducers/themeReducer'
 import userReducer from './reducers/userReducer'
 
@@ -10,6 +11,7 @@ const reducer = combineReducers({
 	article: articleReducer,
 	user: userReducer,
 	theme: themeReducer,
+	filter: filterReducer,
 })
 
 export const store = configureStore({
