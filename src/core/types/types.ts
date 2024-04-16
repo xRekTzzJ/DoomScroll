@@ -70,6 +70,7 @@ export interface IProfileUserState {
 		token: string
 		image?: string
 		password?: string
+		bio: string
 	}
 }
 

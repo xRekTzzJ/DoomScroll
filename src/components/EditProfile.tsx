@@ -39,6 +39,7 @@ const EditProfile = () => {
 			username: user.username,
 			email: user.email,
 			image: user.image,
+			bio: user.bio,
 		},
 	})
 
@@ -192,6 +193,10 @@ const EditProfile = () => {
 						value={watch('bio', '')}
 						placeholder='Bio'
 						{...register('bio', {
+							pattern: {
+								value: /^[^\s]+(?:$|.*[^\s]+$)/,
+								message: 'The bio should not start and end with a space',
+							},
 							minLength: {
 								value: 2,
 								message: 'Your bio needs to be at least 2 characters.',

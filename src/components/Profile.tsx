@@ -11,6 +11,8 @@ import UserImage from './UserImage'
 const Profile = () => {
 	const location = useLocation()
 
+	const usernameParam = location.pathname.split('/').pop()
+
 	const username = useSelector((state: IUserState) => state.user.username)
 
 	const [userState, setUserState] = useState({
@@ -24,8 +26,7 @@ const Profile = () => {
 	const loadProfile = async () => {
 		setLoading(true)
 		try {
-			const username = location.pathname.split('/').pop()
-			setUserState(await getProfile(username ? username : ''))
+			setUserState(await getProfile(usernameParam ? usernameParam : ''))
 		} catch {
 			setError(true)
 		} finally {
@@ -35,7 +36,7 @@ const Profile = () => {
 
 	useEffect(() => {
 		loadProfile()
-	}, [])
+	}, [usernameParam])
 
 	if (loading) {
 		return (
