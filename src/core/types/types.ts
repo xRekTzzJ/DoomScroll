@@ -40,6 +40,7 @@ export interface IProfileInputs {
 	email: string
 	image: string
 	password: string
+	bio: string
 }
 
 export interface ISignInInputs {

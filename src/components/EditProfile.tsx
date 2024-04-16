@@ -186,6 +186,41 @@ const EditProfile = () => {
 					</label>
 				</div>
 				<div>
+					<label htmlFor='bio'>Bio</label>
+					<input
+						id='bio'
+						value={watch('bio', '')}
+						placeholder='Bio'
+						{...register('bio', {
+							minLength: {
+								value: 2,
+								message: 'Your bio needs to be at least 2 characters.',
+							},
+							maxLength: {
+								value: 200,
+								message: 'Your bio needs to be shortest 200 characters.',
+							},
+						})}
+						style={
+							errors.bio
+								? {
+										outline: 'none',
+										borderColor: '#F5222D',
+								  }
+								: {}
+						}
+					/>
+					<label
+						htmlFor='bio'
+						style={{
+							visibility: errors.bio ? 'visible' : 'hidden',
+							color: '#F5222D',
+						}}
+					>
+						{errors.bio ? errors.bio.message : 'text'}
+					</label>
+				</div>
+				<div>
 					<label htmlFor='password'>New password</label>
 					<input
 						type='password'
