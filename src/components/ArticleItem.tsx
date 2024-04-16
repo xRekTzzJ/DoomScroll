@@ -48,7 +48,13 @@ const ArticleItem = ({
 						}
 					})}
 				</div>
-				<div className={classes['article-item__person-info']}>
+				<div
+					className={classes['article-item__person-info']}
+					onClick={e => {
+						e.stopPropagation()
+						navigate(`/profile/${username}`)
+					}}
+				>
 					<span>{username}</span>
 					<span>{format(new Date(createdAt), 'MMMM dd, yyyy')}</span>
 					<UserImage image={image} />

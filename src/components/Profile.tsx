@@ -19,12 +19,18 @@ const Profile = () => {
 		bio: '',
 	})
 	const [loading, setLoading] = useState(true)
+	const [error, setError] = useState(false)
 
 	const loadProfile = async () => {
 		setLoading(true)
-		const username = location.pathname.split('/').pop()
-		setUserState(await getProfile(username ? username : ''))
-		setLoading(false)
+		try {
+			const username = location.pathname.split('/').pop()
+			setUserState(await getProfile(username ? username : ''))
+		} catch {
+			setError(true)
+		} finally {
+			setLoading(false)
+		}
 	}
 
 	useEffect(() => {
@@ -45,6 +51,15 @@ const Profile = () => {
 						/>
 					}
 				/>
+			</div>
+		)
+	}
+
+	if (error) {
+		return (
+			<div className={classes['profile']}>
+				<UserImage image='' />
+				<span>Data error.</span>
 			</div>
 		)
 	}

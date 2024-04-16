@@ -242,6 +242,10 @@ export const deleteComment = async (
 export const getProfile = async (username: string) => {
 	const response = await fetch(`${baseURL}profiles/${username}`)
 
+	if (!response.ok) {
+		throw new Error()
+	}
+
 	const data = await response.json()
 
 	return data.profile

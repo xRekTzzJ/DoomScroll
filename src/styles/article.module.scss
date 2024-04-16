@@ -184,6 +184,16 @@
 		grid-area: person;
 		align-items: center;
 		justify-self: end;
+		cursor: pointer;
+
+		&:hover {
+			span {
+				color: #686de0 !important;
+			}
+			img {
+				transform: scale(1.1);
+			}
+		}
 
 		& span {
 			margin: 0;

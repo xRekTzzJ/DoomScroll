@@ -157,7 +157,13 @@ const Article = () => {
 						}
 					})}
 				</ul>
-				<div className={classes['article__person-info']}>
+				<div
+					className={classes['article__person-info']}
+					onClick={e => {
+						e.stopPropagation()
+						navigate(`/profile/${author.username}`)
+					}}
+				>
 					<span>{author.username}</span>
 					<span>{format(new Date(createdAt), 'MMMM dd, yyyy')}</span>
 					<UserImage image={author.image} />

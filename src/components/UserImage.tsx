@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import avatar from '../assets/img/avatar.png'
+import avatar from '../assets/img/avatar.svg'
 
 const UserImage = ({ image }: { image: string | undefined }) => {
 	const [imageError, setImageError] = useState(false)
