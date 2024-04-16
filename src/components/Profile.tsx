@@ -3,6 +3,8 @@ import { Spin } from 'antd'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
+import activeLike from '../assets/img/active-like.svg'
+import like from '../assets/img/like.svg'
 import { getProfile } from '../core/services/realworld-service'
 import { IUserState } from '../core/types/types'
 import classes from '../styles/profile.module.scss'
@@ -19,6 +21,7 @@ const Profile = () => {
 		username: '',
 		image: '',
 		bio: '',
+		follow: false,
 	})
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(false)
@@ -68,6 +71,12 @@ const Profile = () => {
 	return (
 		<div className={classes['profile']}>
 			<UserImage image={userState.image} />
+			{username !== userState.username && (
+				<div className={classes['profile__rate-container']}>
+					<img src={userState.follow ? activeLike : like} alt='like' />
+					<span>{userState.follow ? 'unfollow' : 'follow'}</span>
+				</div>
+			)}
 			<span>username: {userState.username}</span>
 			{userState.bio && <p>Bio: {userState.bio}</p>}
 			{username === userState.username && (

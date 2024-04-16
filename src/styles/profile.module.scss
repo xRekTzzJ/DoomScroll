@@ -16,7 +16,6 @@
 		align-self: center;
 		width: 400px;
 		border-radius: 20px;
-		margin: 0px 0px 20px;
 	}
 
 	span {
@@ -42,6 +41,41 @@
 
 		&:hover {
 			background-color: #686de0;
+		}
+	}
+
+	&__rate-container {
+		display: flex;
+		gap: 10px;
+		align-items: center;
+		width: fit-content;
+		cursor: pointer;
+		align-self: center;
+		font-style: italic;
+		font-weight: 300;
+		font-size: 22px;
+		margin: 10px 0;
+		padding: 0;
+
+		&:hover {
+			color: #ff0000;
+
+			img {
+				filter: drop-shadow(1px 1px 1px rgb(255, 0, 0));
+			}
+		}
+
+		img {
+			margin: 0;
+			padding: 0;
+			width: 50px;
+			height: 40px;
+		}
+		span {
+			transition: 0.3s;
+			margin: 0;
+			padding: 0;
+			width: fit-content;
 		}
 	}
 }
