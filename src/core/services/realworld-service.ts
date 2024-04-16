@@ -239,11 +239,49 @@ export const deleteComment = async (
 	}
 }
 
-export const getProfile = async (username: string) => {
-	const response = await fetch(`${baseURL}profiles/${username}`)
+export const getProfile = async (username: string, token: string = '') => {
+	const response = await fetch(`${baseURL}profiles/${username}`, {
+		headers: {
+			Authorization: `Token ${token}`,
+		},
+	})
 
 	if (!response.ok) {
 		throw new Error()
+	}
+
+	const data = await response.json()
+
+	return data.profile
+}
+
+export const followUser = async (username: string, token: string = '') => {
+	const response = await fetch(`${baseURL}profiles/${username}/follow`, {
+		method: 'POST',
+		headers: {
+			Authorization: `Token ${token}`,
+		},
+	})
+
+	if (!response.ok) {
+		return new Error()
+	}
+
+	const data = await response.json()
+
+	return data.profile
+}
+
+export const unfollowUser = async (username: string, token: string = '') => {
+	const response = await fetch(`${baseURL}profiles/${username}/follow`, {
+		method: 'DELETE',
+		headers: {
+			Authorization: `Token ${token}`,
+		},
+	})
+
+	if (!response.ok) {
+		return new Error()
 	}
 
 	const data = await response.json()

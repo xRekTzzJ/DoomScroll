@@ -9,6 +9,7 @@ import { format } from 'date-fns'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useAppDispatch } from '../core/hooks/hooks'
 import { deleteComment } from '../core/services/realworld-service'
@@ -26,6 +27,8 @@ const CommentList = ({ slug }: { slug: string }) => {
 	const { token, username } = useSelector((state: IUserState) => state.user)
 
 	const dispatch = useAppDispatch()
+
+	const navigate = useNavigate()
 
 	type Inputs = {
 		body: string
@@ -55,7 +58,10 @@ const CommentList = ({ slug }: { slug: string }) => {
 		return (
 			<ul>
 				{comments.map(i => (
-					<li key={i.id}>
+					<li
+						key={i.id}
+						onClick={() => navigate(`/profile/${i.author.username}`)}
+					>
 						{i.author.username === username && !loading && (
 							<Popconfirm
 								title='Delete the comment'

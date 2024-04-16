@@ -40,6 +40,17 @@
 		grid-area: person;
 		align-items: center;
 		justify-self: end;
+		cursor: pointer;
+
+		&:hover {
+			span {
+				color: #686de0 !important;
+			}
+
+			img {
+				border: 1px solid #f0f0f0;
+			}
+		}
 
 		& span {
 			margin: 0;
@@ -74,6 +85,7 @@
 			border-radius: 10px;
 			grid-area: avatar;
 			transition: 0.3s;
+			border: 1px solid #000000;
 		}
 	}
 
