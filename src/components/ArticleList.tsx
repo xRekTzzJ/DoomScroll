@@ -51,16 +51,39 @@ const ArticleList: React.FC = () => {
 
 	if (loading) {
 		return (
-			<section className={wrapperClass['article-list-wrapper']}>
-				<Spin
-					indicator={<LoadingOutlined style={{ fontSize: 50 }} spin />}
+			<>
+				<div
+					className={wrapperClass['article-list-wrapper__filter']}
 					style={{
-						fontSize: '54px',
-						margin: 'auto',
-						color: 'white',
+						margin: '0 auto',
 					}}
-				/>
-			</section>
+				>
+					<Button
+						size='large'
+						type={filter === 'All' ? 'primary' : 'default'}
+						onClick={() => dispatch(allArticles)}
+					>
+						All articles
+					</Button>
+					<Button
+						size='large'
+						onClick={() => dispatch(feedArticles)}
+						type={filter === 'Feed' ? 'primary' : 'default'}
+					>
+						Followed
+					</Button>
+				</div>
+				<section className={wrapperClass['article-list-wrapper']}>
+					<Spin
+						indicator={<LoadingOutlined style={{ fontSize: 50 }} spin />}
+						style={{
+							fontSize: '54px',
+							margin: 'auto',
+							color: 'white',
+						}}
+					/>
+				</section>
+			</>
 		)
 	}
 
