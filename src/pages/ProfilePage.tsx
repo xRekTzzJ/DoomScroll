@@ -1,7 +1,7 @@
 import Header from '../components/Header'
 import Profile from '../components/Profile'
 
-const ProfilePage: React.FC = () => {
+const ProfilePage = () => {
 	return (
 		<>
 			<Header />

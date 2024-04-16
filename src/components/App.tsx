@@ -9,6 +9,7 @@ import { changeTheme, checkAuth } from '../core/store/actions'
 import ArticleListPage from '../pages/ArticleListPage'
 import ArticlePage from '../pages/ArticlePage'
 import EditArticlePage from '../pages/EditArticlePage'
+import EditProfilePage from '../pages/EditProfilePage'
 import NotFoundPage from '../pages/NotFoundPage'
 import ProfilePage from '../pages/ProfilePage'
 import SignInPage from '../pages/SignInPage'
@@ -71,8 +72,12 @@ const App: React.FC = () => {
 			element: <SignInPage />,
 		},
 		{
-			path: '/profile',
+			path: '/profile/:username/',
 			element: <ProfilePage />,
+		},
+		{
+			path: '/edit-profile',
+			element: <EditProfilePage />,
 		},
 		{
 			path: '/new-article',

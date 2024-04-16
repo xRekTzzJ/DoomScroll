@@ -14,7 +14,7 @@ const HeaderProfile = ({
 	return (
 		<div className={classes['header__profile-container']}>
 			<Link to='/new-article'>Create article</Link>
-			<Link className={classes['header__profile']} to='/profile'>
+			<Link className={classes['header__profile']} to={`/profile/${username}`}>
 				<div>
 					<span>{username}</span>
 					<UserImage image={image} />

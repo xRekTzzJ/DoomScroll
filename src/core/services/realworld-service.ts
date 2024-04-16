@@ -238,3 +238,11 @@ export const deleteComment = async (
 		throw response
 	}
 }
+
+export const getProfile = async (username: string) => {
+	const response = await fetch(`${baseURL}profiles/${username}`)
+
+	const data = await response.json()
+
+	return data.profile
+}
