@@ -6,6 +6,7 @@ import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useAppDispatch } from '../core/hooks/hooks'
 import { changeTheme, checkAuth } from '../core/store/actions'
+import { IUserState } from '../core/types/types'
 import ArticleListPage from '../pages/ArticleListPage'
 import ArticlePage from '../pages/ArticlePage'
 import EditArticlePage from '../pages/EditArticlePage'
@@ -19,6 +20,8 @@ const App: React.FC = () => {
 	const [loading, setLoading] = useState(true)
 	const dispatch = useAppDispatch()
 	const theme = useSelector((state: { theme: boolean }) => state.theme)
+
+	const token = useSelector((state: IUserState) => state.user.token)
 
 	const initialState = async () => {
 		try {
@@ -77,15 +80,15 @@ const App: React.FC = () => {
 		},
 		{
 			path: '/edit-profile',
-			element: <EditProfilePage />,
+			element: token ? <EditProfilePage /> : <Navigate to={'/articles/'} />,
 		},
 		{
 			path: '/new-article',
-			element: <EditArticlePage />,
+			element: token ? <EditArticlePage /> : <Navigate to={'/articles/'} />,
 		},
 		{
 			path: '/articles/:slug/edit',
-			element: <EditArticlePage />,
+			element: token ? <EditArticlePage /> : <Navigate to={'/articles/'} />,
 		},
 	])
 
