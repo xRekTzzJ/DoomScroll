@@ -195,7 +195,7 @@ const ArticleList: React.FC = () => {
 			{!articles.length && (
 				<div
 					style={{
-						color: '#f0f0f0',
+						color: theme ? '#000000' : '#f0f0f0',
 						fontSize: '24px',
 					}}
 				>

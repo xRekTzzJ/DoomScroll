@@ -83,10 +83,6 @@
 	@media screen and (max-width: 600px) {
 		width: 400px;
 
-		&__title {
-			max-width: 100% !important;
-		}
-
 		p {
 			text-align: center;
 			max-width: 100% !important;
@@ -99,6 +95,21 @@
 
 	@media screen and (max-width: 450px) {
 		width: 350px;
+	}
+
+	@media screen and (max-width: 400px) {
+		width: 300px;
+
+		p,
+		span,
+		h2 {
+			max-width: 300px !important;
+			font-size: 12px !important;
+		}
+
+		&__header {
+			max-width: 100%;
+		}
 	}
 
 	&:hover {

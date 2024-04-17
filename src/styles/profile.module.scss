@@ -12,6 +12,25 @@
 	border-radius: 20px;
 	gap: 20px;
 
+	@media screen and (max-width: 570px) {
+		width: 300px;
+		img {
+			width: 100% !important;
+		}
+	}
+
+	@media screen and (max-width: 460px) {
+		padding: 48px 16px;
+	}
+
+	@media screen and (max-width: 390px) {
+		padding: 24px 8px;
+	}
+
+	@media screen and (max-width: 320px) {
+		width: 250px;
+	}
+
 	img {
 		align-self: center;
 		width: 400px;
