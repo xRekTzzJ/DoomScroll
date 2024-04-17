@@ -1,6 +1,6 @@
 import { IUserData } from '../types/types'
 
-const baseURL: string = 'https://blog.kata.academy/api/'
+const baseURL: string = 'https://api.realworld.io/api/'
 
 export const getArticles = async (page: number, key = '') => {
 	const data = await fetch(

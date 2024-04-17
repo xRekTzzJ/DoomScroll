@@ -52,27 +52,29 @@ const ArticleList: React.FC = () => {
 	if (loading) {
 		return (
 			<>
-				<div
-					className={wrapperClass['article-list-wrapper__filter']}
-					style={{
-						margin: '0 auto',
-					}}
-				>
-					<Button
-						size='large'
-						type={filter === 'All' ? 'primary' : 'default'}
-						onClick={() => dispatch(allArticles)}
+				{token && (
+					<div
+						className={wrapperClass['article-list-wrapper__filter']}
+						style={{
+							margin: '0 auto',
+						}}
 					>
-						All articles
-					</Button>
-					<Button
-						size='large'
-						onClick={() => dispatch(feedArticles)}
-						type={filter === 'Feed' ? 'primary' : 'default'}
-					>
-						Followed
-					</Button>
-				</div>
+						<Button
+							size='large'
+							type={filter === 'All' ? 'primary' : 'default'}
+							onClick={() => dispatch(allArticles)}
+						>
+							All articles
+						</Button>
+						<Button
+							size='large'
+							onClick={() => dispatch(feedArticles)}
+							type={filter === 'Feed' ? 'primary' : 'default'}
+						>
+							Followed
+						</Button>
+					</div>
+				)}
 				<section className={wrapperClass['article-list-wrapper']}>
 					<Spin
 						indicator={<LoadingOutlined style={{ fontSize: 50 }} spin />}
@@ -90,22 +92,24 @@ const ArticleList: React.FC = () => {
 	if (error) {
 		return (
 			<section className={articleListClasses['article-list']}>
-				<div className={wrapperClass['article-list-wrapper__filter']}>
-					<Button
-						size='large'
-						type={filter === 'All' ? 'primary' : 'default'}
-						onClick={() => dispatch(allArticles)}
-					>
-						All articles
-					</Button>
-					<Button
-						size='large'
-						onClick={() => dispatch(feedArticles)}
-						type={filter === 'Feed' ? 'primary' : 'default'}
-					>
-						Followed
-					</Button>
-				</div>
+				{token && (
+					<div className={wrapperClass['article-list-wrapper__filter']}>
+						<Button
+							size='large'
+							type={filter === 'All' ? 'primary' : 'default'}
+							onClick={() => dispatch(allArticles)}
+						>
+							All articles
+						</Button>
+						<Button
+							size='large'
+							onClick={() => dispatch(feedArticles)}
+							type={filter === 'Feed' ? 'primary' : 'default'}
+						>
+							Followed
+						</Button>
+					</div>
+				)}
 				<Alert
 					style={{
 						width: 900,
@@ -124,22 +128,24 @@ const ArticleList: React.FC = () => {
 			className={wrapperClass['article-list-wrapper']}
 			style={{ margin: 0, height: '100%' }}
 		>
-			<div className={wrapperClass['article-list-wrapper__filter']}>
-				<Button
-					size='large'
-					type={filter === 'All' ? 'primary' : 'default'}
-					onClick={() => dispatch(allArticles)}
-				>
-					All articles
-				</Button>
-				<Button
-					size='large'
-					onClick={() => dispatch(feedArticles)}
-					type={filter === 'Feed' ? 'primary' : 'default'}
-				>
-					Followed
-				</Button>
-			</div>
+			{token && (
+				<div className={wrapperClass['article-list-wrapper__filter']}>
+					<Button
+						size='large'
+						type={filter === 'All' ? 'primary' : 'default'}
+						onClick={() => dispatch(allArticles)}
+					>
+						All articles
+					</Button>
+					<Button
+						size='large'
+						onClick={() => dispatch(feedArticles)}
+						type={filter === 'Feed' ? 'primary' : 'default'}
+					>
+						Followed
+					</Button>
+				</div>
+			)}
 
 			<svg
 				style={{
