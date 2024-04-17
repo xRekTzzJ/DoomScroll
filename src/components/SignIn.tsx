@@ -7,17 +7,23 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useAppDispatch } from '../core/hooks/hooks'
 import { loginUser } from '../core/store/actions'
-import { ISignInInputs } from '../core/types/types'
+import { ISignInInputs, IUserState } from '../core/types/types'
 import classes from '../styles/form.module.scss'
 
 const SignIn = () => {
 	const dispatch = useAppDispatch()
+
+	const token = useSelector((state: IUserState) => state.user.token)
 
 	const theme = useSelector((state: { theme: boolean }) => state.theme)
 
 	const navigate = useNavigate()
 
 	const [loading, setLoading] = useState(false)
+
+	if (token) {
+		navigate('/articles/')
+	}
 
 	const {
 		register,
@@ -41,7 +47,7 @@ const SignIn = () => {
 		try {
 			await dispatch(loginUser({ email, password }))
 			setLoading(false)
-			navigate('/')
+			navigate('/articles/')
 			toast.success('You have successfully logged in to your profile!')
 		} catch (error) {
 			toast.error('The email or password is incorrect.')

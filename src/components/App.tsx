@@ -68,11 +68,11 @@ const App: React.FC = () => {
 		},
 		{
 			path: '/sign-up',
-			element: <SignUpPage />,
+			element: !token ? <SignUpPage /> : <Navigate to={'/articles/'} />,
 		},
 		{
 			path: '/sign-in',
-			element: <SignInPage />,
+			element: !token ? <SignInPage /> : <Navigate to={'/articles/'} />,
 		},
 		{
 			path: '/profile/:username/',
