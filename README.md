@@ -8,7 +8,7 @@
 4. React
 5. Redux
 6. React Hook Form
-7. React Router DOM v5
+7. React Router DOM
 8. TypeScript
 
 [Ссылка на vercel](https://doom-scroll-neon.vercel.app/articles/)
