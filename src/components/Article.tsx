@@ -1,7 +1,7 @@
 import { LoadingOutlined, QuestionCircleOutlined } from '@ant-design/icons'
 import { Popconfirm, Spin } from 'antd'
 import { format } from 'date-fns'
-import { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import Markdown from 'react-markdown'
 import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -15,7 +15,7 @@ import CommentList from './CommentList'
 import Rate from './Rate'
 import UserImage from './UserImage'
 
-const Article = () => {
+const Article: FC = () => {
 	const dispatch = useAppDispatch()
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(false)

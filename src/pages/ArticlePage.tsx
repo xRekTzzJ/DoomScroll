@@ -1,9 +1,9 @@
-import React from 'react'
+import { FC } from 'react'
 
 import Article from '../components/Article'
 import Header from '../components/Header'
 
-const ArticlePage: React.FC = () => {
+const ArticlePage: FC = () => {
 	return (
 		<>
 			<Header />

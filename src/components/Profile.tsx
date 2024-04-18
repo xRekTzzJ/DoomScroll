@@ -1,6 +1,6 @@
 import { LoadingOutlined } from '@ant-design/icons'
 import { Spin } from 'antd'
-import { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -15,7 +15,7 @@ import { IUserState } from '../core/types/types'
 import classes from '../styles/profile.module.scss'
 import UserImage from './UserImage'
 
-const Profile = () => {
+const Profile: FC = () => {
 	const location = useLocation()
 
 	const usernameParam = location.pathname.split('/').pop()

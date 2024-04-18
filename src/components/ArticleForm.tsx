@@ -1,6 +1,6 @@
 import { LoadingOutlined } from '@ant-design/icons'
 import { Spin } from 'antd'
-import { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -16,7 +16,7 @@ import { useAppDispatch } from '../core/hooks/hooks'
 import { IArticleState, ICreateArticle, IUserState } from '../core/types/types'
 import classes from '../styles/article-form.module.scss'
 
-const ArticleForm = () => {
+const ArticleForm: FC = () => {
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 	const location = useLocation()

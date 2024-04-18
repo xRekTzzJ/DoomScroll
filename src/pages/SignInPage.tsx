@@ -1,7 +1,8 @@
+import { FC } from 'react'
 import Header from '../components/Header'
 import SignIn from '../components/SignIn'
 
-const SignInPage: React.FC = () => {
+const SignInPage: FC = () => {
 	return (
 		<>
 			<Header />

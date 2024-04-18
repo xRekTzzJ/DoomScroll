@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons'
 import { Popconfirm, Spin } from 'antd'
 import { format } from 'date-fns'
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -18,7 +18,7 @@ import { IArticleState, IUserState } from '../core/types/types'
 import classes from '../styles/comment-list.module.scss'
 import UserImage from './UserImage'
 
-const CommentList = ({ slug }: { slug: string }) => {
+const CommentList: FC<{ slug: string }> = ({ slug }) => {
 	const [commentState, setCommentState] = useState(false)
 	const [loading, setLoading] = useState(false)
 	const [sendingComment, setSendingComment] = useState(false)

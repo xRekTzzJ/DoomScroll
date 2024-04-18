@@ -1,6 +1,6 @@
 import { LoadingOutlined } from '@ant-design/icons'
 import { Alert, Button, ConfigProvider, Pagination, Spin } from 'antd'
-import { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 import { useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -11,7 +11,7 @@ import wrapperClass from '../styles/article-list-wrapper.module.scss'
 import articleListClasses from '../styles/article-list.module.scss'
 import ArticleItem from './ArticleItem'
 
-const ArticleList: React.FC = () => {
+const ArticleList: FC = () => {
 	const navigate = useNavigate()
 	const location = useLocation()
 

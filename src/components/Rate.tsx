@@ -1,6 +1,6 @@
 import { LoadingOutlined } from '@ant-design/icons'
 import { Spin } from 'antd'
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import activeLike from '../assets/img/active-like.svg'
@@ -14,7 +14,7 @@ import {
 import { IProfileUserState, RateProps } from '../core/types/types'
 import classes from '../styles/rate.module.scss'
 
-const Rate = ({ favoritesCount, favorited, slug = '' }: RateProps) => {
+const Rate: FC<RateProps> = ({ favoritesCount, favorited, slug = '' }) => {
 	const token = useSelector((state: IProfileUserState) => state.user.token)
 	const [isFavorited, setIsFavorited] = useState(favorited)
 	const [favortiedCount, setFavoritedCount] = useState(favoritesCount)

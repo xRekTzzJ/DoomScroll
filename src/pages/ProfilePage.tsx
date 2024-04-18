@@ -1,7 +1,8 @@
+import { FC } from 'react'
 import Header from '../components/Header'
 import Profile from '../components/Profile'
 
-const ProfilePage = () => {
+const ProfilePage: FC = () => {
 	return (
 		<>
 			<Header />

@@ -5,7 +5,7 @@ import {
 	SunOutlined,
 } from '@ant-design/icons'
 import { Switch } from 'antd'
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { useAppDispatch } from '../core/hooks/hooks'
@@ -16,7 +16,7 @@ import HeaderProfile from './HeaderProfile'
 import LogOutModal from './LogOutModal'
 import SignButtons from './SignButtons'
 
-const Header: React.FC = () => {
+const Header: FC = () => {
 	const [menuState, setMenuState] = useState(false)
 	const { token, username, image } = useSelector(
 		(state: IUserState) => state.user

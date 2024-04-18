@@ -1,7 +1,8 @@
+import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import classes from '../styles/error-page.module.scss'
 
-const ErrorPage = () => {
+const ErrorPage: FC = () => {
 	return (
 		<div className={classes['error-page']}>
 			<span>There is no such page.</span>

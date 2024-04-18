@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import avatar from '../assets/img/avatar.svg'
 
-const UserImage = ({ image }: { image: string | undefined }) => {
+const UserImage: FC<{ image: string | undefined }> = ({ image }) => {
 	const [imageError, setImageError] = useState(false)
 
 	if (imageError) {

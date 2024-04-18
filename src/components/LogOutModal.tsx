@@ -1,18 +1,16 @@
 import { ConfigProvider, Modal } from 'antd'
 
+import { FC } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useAppDispatch } from '../core/hooks/hooks'
 import { logOut } from '../core/store/actions'
 
-const LogOutModal = ({
-	active,
-	logOutHandler,
-}: {
+const LogOutModal: FC<{
 	active: boolean
 	logOutHandler: (arg: boolean) => void
-}) => {
+}> = ({ active, logOutHandler }) => {
 	const dispatch = useAppDispatch()
 
 	const theme = useSelector((state: { theme: boolean }) => state.theme)

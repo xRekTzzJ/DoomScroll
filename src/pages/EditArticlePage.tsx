@@ -1,7 +1,8 @@
+import { FC } from 'react'
 import ArticleForm from '../components/ArticleForm'
 import Header from '../components/Header'
 
-const EditArticlePage = () => {
+const EditArticlePage: FC = () => {
 	return (
 		<>
 			<Header />

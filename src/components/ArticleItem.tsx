@@ -1,4 +1,5 @@
 import { format } from 'date-fns'
+import { FC } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { ArticleItemProps } from '../core/types/types'
@@ -6,7 +7,7 @@ import classes from '../styles/article-item.module.scss'
 import Rate from './Rate'
 import UserImage from './UserImage'
 
-const ArticleItem = ({
+const ArticleItem: FC<ArticleItemProps> = ({
 	title,
 	username,
 	description,
@@ -16,7 +17,7 @@ const ArticleItem = ({
 	tagList,
 	slug,
 	favorited,
-}: ArticleItemProps) => {
+}) => {
 	const navigate = useNavigate()
 
 	const theme = useSelector((state: { theme: boolean }) => state.theme)

@@ -1,6 +1,6 @@
 import { LoadingOutlined } from '@ant-design/icons'
 import { Spin } from 'antd'
-import { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 
 import { useSelector } from 'react-redux'
@@ -16,7 +16,7 @@ import ProfilePage from '../pages/ProfilePage'
 import SignInPage from '../pages/SignInPage'
 import SignUpPage from '../pages/SignUpPage'
 
-const App: React.FC = () => {
+const App: FC = () => {
 	const [loading, setLoading] = useState(true)
 	const dispatch = useAppDispatch()
 	const theme = useSelector((state: { theme: boolean }) => state.theme)

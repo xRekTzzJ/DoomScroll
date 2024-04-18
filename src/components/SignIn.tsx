@@ -1,6 +1,6 @@
 import { LoadingOutlined } from '@ant-design/icons'
 import { Spin } from 'antd'
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
@@ -10,7 +10,7 @@ import { loginUser } from '../core/store/actions'
 import { ISignInInputs, IUserState } from '../core/types/types'
 import classes from '../styles/form.module.scss'
 
-const SignIn = () => {
+const SignIn: FC = () => {
 	const dispatch = useAppDispatch()
 
 	const token = useSelector((state: IUserState) => state.user.token)

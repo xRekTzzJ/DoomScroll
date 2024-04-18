@@ -1,6 +1,6 @@
 import { LoadingOutlined } from '@ant-design/icons'
 import { Spin } from 'antd'
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
@@ -16,7 +16,7 @@ import {
 
 import classes from '../styles/form.module.scss'
 
-const EditProfile = () => {
+const EditProfile: FC = () => {
 	const theme = useSelector((state: { theme: boolean }) => state.theme)
 
 	const navigate = useNavigate()
